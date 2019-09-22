@@ -93,7 +93,7 @@ int main(int argc, char *argv[]){
     fileBuffer = malloc(sizeof(int));
     fileBuffer[0] = 0;
 
-    if(arg == 2){
+    if(argc == 2){
         if(inputFile = fopen(argv[1], "r")){
             yyin = inputFile;
         }
@@ -113,9 +113,9 @@ int main(int argc, char *argv[]){
     //SWITCH CASE WHILE
 
     i = 0;
-    while (buf[i] != 0)
+    while (fileBuffer[i] != 0)
     {
-        switch(buf[i])
+        switch(fileBuffer[i])
         {
             case NUM: printf("NUM "); break;
             case ID:  printf("ID ");  break;
