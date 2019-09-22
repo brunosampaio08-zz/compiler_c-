@@ -156,5 +156,5 @@ int main(int argc, char *argv[]){
     free(fileBuffer);
     fclose(inputFile);
 
-    return 0;
+    return (0);
 }
