@@ -1,0 +1,61 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int varreEscala(int Intervalo, int K, int *vetAcorde, int Escala){
+	int i = K, AuxInit = vetAcorde[K], AuxFim = vetAcorde[K]+Intervalo, Continue = 1;
+
+	if(K == Escala/Intervalo){
+		return 0;
+	}
+	
+	do{
+		if(AuxInit <= AuxFim){
+			if(!(vetAcorde[i] >= AuxInit && vetAcorde[i] < AuxFim)){
+				Continue = 0;
+			}else if(vetAcorde[(i+1)%(Escala/Intervalo)] >= AuxInit && vetAcorde[(i+1)%(Escala/Intervalo)] < AuxFim){
+				Continue = 0;
+			}
+		}else{
+			if(!((vetAcorde[i] >= AuxInit && vetAcorde[i] <= Escala-1) || (vetAcorde[i] >= 0 && vetAcorde[i] < AuxFim))){
+				Continue = 0;
+			}else if((vetAcorde[(i+1)%(Escala/Intervalo)] >= AuxInit && vetAcorde[(i+1)%(Escala/Intervalo)] <= Escala-1) || 
+					(vetAcorde[(i+1)%(Escala/Intervalo)] >= 0 && vetAcorde[(i+1)%(Escala/Intervalo)] < AuxFim)){
+				Continue = 0;
+			}
+		}
+		
+		AuxInit = (AuxInit+Intervalo)%Escala;
+		AuxFim = (AuxFim+Intervalo)%Escala;
+	
+		i = (i+1)%(Escala/Intervalo);
+	}while(i != K && Continue == 1);
+
+	if(i == K){
+		return 1;
+	}
+
+	varreEscala(Intervalo, K+1, vetAcorde, Escala);
+}
+
+int main(){
+	int Escala, Acorde, *vetAcordes, SouN, i;
+
+	scanf("%d", &Escala);
+	scanf("%d", &Acorde);
+
+	vetAcordes = malloc(Acorde*sizeof(int));
+
+	for(i = 0; i < Acorde; i++){
+		scanf("%d", &vetAcordes[i]);
+	}
+	
+	SouN = varreEscala(Escala/Acorde, 0, vetAcordes, Escala);
+
+	if(SouN == 1){
+		printf("S");
+	}else{
+		printf("N");
+	}
+
+	return 0;
+}

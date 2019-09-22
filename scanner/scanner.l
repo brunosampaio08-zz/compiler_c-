@@ -103,7 +103,7 @@ int main(int argc, char *argv[]){
     }
 
     i = 1;
-    while(token = yylex() != FIM){
+    while((token = yylex()) != FIM){
         i++;
         fileBuffer = realloc(fileBuffer, i*sizeof(int));
         fileBuffer[i-2] = token;
@@ -113,8 +113,8 @@ int main(int argc, char *argv[]){
     //SWITCH CASE WHILE
 
     i = 0;
-    while (fileBuffer[i] != 0)
-    {
+
+    while (fileBuffer[i] != 0){
         switch(fileBuffer[i])
         {
             case NUM: printf("NUM "); break;
