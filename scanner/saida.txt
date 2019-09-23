@@ -1,232 +1,232 @@
-int ID [ NUM ] ; 
+INT ID ACL NUM FCL PEV 
  
- int ID ( int ID [ ] , int ID , int ID ) 
- { 	int ID ; int ID ; int ID ; 
- 	ID  = ID ; 
- 	ID  = ID [ ID ] ; 
- 	ID  = ID + NUM ; 
- 	while ( ID  < ID ) { 
- 		if ( ID [ ID ]  < ID ) { 
- 			ID  = ID [ ID ] ; 
- 			ID  = ID ; 
- 		} 
- 		ID  = ID + NUM ; 
- 	} 
- 	return ID ; 
- } 
+ INT ID APR INT ID ACL FCL VIR INT ID VIR INT ID FPR 
+ ACH 	INT ID PEV INT ID PEV INT ID PEV 
+ 	ID  ATR ID PEV 
+ 	ID  ATR ID ACL ID FCL PEV 
+ 	ID  ATR ID SOM NUM PEV 
+ 	WHILE APR ID  MEN ID FPR ACH 
+ 		IF APR ID ACL ID FCL  MEN ID FPR ACH 
+ 			ID  ATR ID ACL ID FCL PEV 
+ 			ID  ATR ID PEV 
+ 		FCH 
+ 		ID  ATR ID SOM NUM PEV 
+ 	FCH 
+ 	RETURN ID PEV 
+ FCH 
  
- void ID ( int ID [ ] , int ID , int ID ) 
- { 	int ID ; int ID ; 
- 	ID  = ID ; 
- 	while ( ID  < ID - NUM ) { 
- 		int ID ; 
- 		ID  = ID ( ID , ID , ID ) ; 
- 		ID  = ID [ ID ] ; 
- 		ID [ ID ]  = ID [ ID ] ; 
- 		ID [ ID ]  = ID ; 
- 		ID  = ID + NUM ; 
- 	} 
- } 
+ VOID ID APR INT ID ACL FCL VIR INT ID VIR INT ID FPR 
+ ACH 	INT ID PEV INT ID PEV 
+ 	ID  ATR ID PEV 
+ 	WHILE APR ID  MEN ID SUB NUM FPR ACH 
+ 		INT ID PEV 
+ 		ID  ATR ID APR ID VIR ID VIR ID FPR PEV 
+ 		ID  ATR ID ACL ID FCL PEV 
+ 		ID ACL ID FCL  ATR ID ACL ID FCL PEV 
+ 		ID ACL ID FCL  ATR ID PEV 
+ 		ID  ATR ID SOM NUM PEV 
+ 	FCH 
+ FCH 
  
- void ID ( void ) 
- { 
- 	int ID ; 
- 	ID  = NUM ; 
- 	while ( ID  < NUM ) { 
- 		ID [ ID ]  = ID ( ) ; 
- 		ID  = ID + NUM ; 
- 	} 
- 	ID ( ID , NUM , NUM ) ; 
- 	ID  = NUM ; 
- 	while ( ID  < NUM ) { 
- 		ID ( ID [ ID ] ) ; 
- 		ID  = ID + NUM ; 
- 	} 
- } 
+ VOID ID APR VOID FPR 
+ ACH 
+ 	INT ID PEV 
+ 	ID  ATR NUM PEV 
+ 	WHILE APR ID  MEN NUM FPR ACH 
+ 		ID ACL ID FCL  ATR ID APR FPR PEV 
+ 		ID  ATR ID SOM NUM PEV 
+ 	FCH 
+ 	ID APR ID VIR NUM VIR NUM FPR PEV 
+ 	ID  ATR NUM PEV 
+ 	WHILE APR ID  MEN NUM FPR ACH 
+ 		ID APR ID ACL ID FCL FPR PEV 
+ 		ID  ATR ID SOM NUM PEV 
+ 	FCH 
+ FCH 
  
- int ID [ NUM ] ; 
+ INT ID ACL NUM FCL PEV 
  
- int ID ( int ID [ ] , int ID , int ID ) 
- { 	int ID ; int ID ; int ID ; 
- 	ID  = ID ; 
- 	ID  = ID [ ID ] ; 
- 	ID  = ID + NUM ; 
- 	while ( ID  < ID ) { 
- 		if ( ID [ ID ]  < ID ) { 
- 			ID  = ID [ ID ] ; 
- 			ID  = ID ; 
- 		} 
- 		ID  = ID + NUM ; 
- 	} 
- 	return ID ; 
- } 
+ INT ID APR INT ID ACL FCL VIR INT ID VIR INT ID FPR 
+ ACH 	INT ID PEV INT ID PEV INT ID PEV 
+ 	ID  ATR ID PEV 
+ 	ID  ATR ID ACL ID FCL PEV 
+ 	ID  ATR ID SOM NUM PEV 
+ 	WHILE APR ID  MEN ID FPR ACH 
+ 		IF APR ID ACL ID FCL  MEN ID FPR ACH 
+ 			ID  ATR ID ACL ID FCL PEV 
+ 			ID  ATR ID PEV 
+ 		FCH 
+ 		ID  ATR ID SOM NUM PEV 
+ 	FCH 
+ 	RETURN ID PEV 
+ FCH 
  
- void ID ( int ID [ ] , int ID , int ID ) 
- { 	int ID ; int ID ; 
- 	ID  = ID ; 
- 	while ( ID  < ID - NUM ) { 
- 		int ID ; 
- 		ID  = ID ( ID , ID , ID ) ; 
- 		ID  = ID [ ID ] ; 
- 		ID [ ID ]  = ID [ ID ] ; 
- 		ID [ ID ]  = ID ; 
- 		ID  = ID + NUM ; 
- 	} 
- } 
+ VOID ID APR INT ID ACL FCL VIR INT ID VIR INT ID FPR 
+ ACH 	INT ID PEV INT ID PEV 
+ 	ID  ATR ID PEV 
+ 	WHILE APR ID  MEN ID SUB NUM FPR ACH 
+ 		INT ID PEV 
+ 		ID  ATR ID APR ID VIR ID VIR ID FPR PEV 
+ 		ID  ATR ID ACL ID FCL PEV 
+ 		ID ACL ID FCL  ATR ID ACL ID FCL PEV 
+ 		ID ACL ID FCL  ATR ID PEV 
+ 		ID  ATR ID SOM NUM PEV 
+ 	FCH 
+ FCH 
  
- void ID ( void ) 
- { 
- 	int ID ; 
- 	ID  = NUM ; 
- 	while ( ID  < NUM ) { 
- 		ID [ ID ]  = ID ( ) ; 
- 		ID  = ID + NUM ; 
- 	} 
- 	ID ( ID , NUM , NUM ) ; 
- 	ID  = NUM ; 
- 	while ( ID  < NUM ) { 
- 		ID ( ID [ ID ] ) ; 
- 		ID  = ID + NUM ; 
- 	} 
- } 
+ VOID ID APR VOID FPR 
+ ACH 
+ 	INT ID PEV 
+ 	ID  ATR NUM PEV 
+ 	WHILE APR ID  MEN NUM FPR ACH 
+ 		ID ACL ID FCL  ATR ID APR FPR PEV 
+ 		ID  ATR ID SOM NUM PEV 
+ 	FCH 
+ 	ID APR ID VIR NUM VIR NUM FPR PEV 
+ 	ID  ATR NUM PEV 
+ 	WHILE APR ID  MEN NUM FPR ACH 
+ 		ID APR ID ACL ID FCL FPR PEV 
+ 		ID  ATR ID SOM NUM PEV 
+ 	FCH 
+ FCH 
  
- 			int ID [ NUM ] ; 
+ 			INT ID ACL NUM FCL PEV 
  
- int ID ( int ID [ ] , int ID , int ID ) 
- { 	int ID ; int ID ; int ID ; 
- 	ID  = ID ; 
- 	ID  = ID [ ID ] ; 
- 	ID  = ID + NUM ; 
- 	while ( ID  < ID ) { 
- 		if ( ID [ ID ]  < ID ) { 
- 			ID  = ID [ ID ] ; 
- 			ID  = ID ; 
- 		} 
- 		ID  = ID + NUM ; 
- 	} 
- 	return ID ; 
- } 
+ INT ID APR INT ID ACL FCL VIR INT ID VIR INT ID FPR 
+ ACH 	INT ID PEV INT ID PEV INT ID PEV 
+ 	ID  ATR ID PEV 
+ 	ID  ATR ID ACL ID FCL PEV 
+ 	ID  ATR ID SOM NUM PEV 
+ 	WHILE APR ID  MEN ID FPR ACH 
+ 		IF APR ID ACL ID FCL  MEN ID FPR ACH 
+ 			ID  ATR ID ACL ID FCL PEV 
+ 			ID  ATR ID PEV 
+ 		FCH 
+ 		ID  ATR ID SOM NUM PEV 
+ 	FCH 
+ 	RETURN ID PEV 
+ FCH 
  
- void ID ( int ID [ ] , int ID , int ID ) 
- { 	int ID ; int ID ; 
- 	ID  = ID ; 
- 	while ( ID  < ID - NUM ) { 
- 		int ID ; 
- 		ID  = ID ( ID , ID , ID ) ; 
- 		ID  = ID [ ID ] ; 
- 		ID [ ID ]  = ID [ ID ] ; 
- 		ID [ ID ]  = ID ; 
- 		ID  = ID + NUM ; 
- 	} 
- } 
+ VOID ID APR INT ID ACL FCL VIR INT ID VIR INT ID FPR 
+ ACH 	INT ID PEV INT ID PEV 
+ 	ID  ATR ID PEV 
+ 	WHILE APR ID  MEN ID SUB NUM FPR ACH 
+ 		INT ID PEV 
+ 		ID  ATR ID APR ID VIR ID VIR ID FPR PEV 
+ 		ID  ATR ID ACL ID FCL PEV 
+ 		ID ACL ID FCL  ATR ID ACL ID FCL PEV 
+ 		ID ACL ID FCL  ATR ID PEV 
+ 		ID  ATR ID SOM NUM PEV 
+ 	FCH 
+ FCH 
  
- void ID ( void ) 
- { 
- 	int ID ; 
- 	ID  = NUM ; 
- 	while ( ID  < NUM ) { 
- 		ID [ ID ]  = ID ( ) ; 
- 		ID  = ID + NUM ; 
- 	} 
- 	ID ( ID , NUM , NUM ) ; 
- 	ID  = NUM ; 
- 	while ( ID  < NUM ) { 
- 		ID ( ID [ ID ] ) ; 
- 		ID  = ID + NUM ; 
- 	} 
- } 
+ VOID ID APR VOID FPR 
+ ACH 
+ 	INT ID PEV 
+ 	ID  ATR NUM PEV 
+ 	WHILE APR ID  MEN NUM FPR ACH 
+ 		ID ACL ID FCL  ATR ID APR FPR PEV 
+ 		ID  ATR ID SOM NUM PEV 
+ 	FCH 
+ 	ID APR ID VIR NUM VIR NUM FPR PEV 
+ 	ID  ATR NUM PEV 
+ 	WHILE APR ID  MEN NUM FPR ACH 
+ 		ID APR ID ACL ID FCL FPR PEV 
+ 		ID  ATR ID SOM NUM PEV 
+ 	FCH 
+ FCH 
  
- 			int ID [ NUM ] ; 
+ 			INT ID ACL NUM FCL PEV 
  
- int ID ( int ID [ ] , int ID , int ID ) 
- { 	int ID ; int ID ; int ID ; 
- 	ID  = ID ; 
- 	ID  = ID [ ID ] ; 
- 	ID  = ID + NUM ; 
- 	while ( ID  < ID ) { 
- 		if ( ID [ ID ]  < ID ) { 
- 			ID  = ID [ ID ] ; 
- 			ID  = ID ; 
- 		} 
- 		ID  = ID + NUM ; 
- 	} 
- 	return ID ; 
- } 
+ INT ID APR INT ID ACL FCL VIR INT ID VIR INT ID FPR 
+ ACH 	INT ID PEV INT ID PEV INT ID PEV 
+ 	ID  ATR ID PEV 
+ 	ID  ATR ID ACL ID FCL PEV 
+ 	ID  ATR ID SOM NUM PEV 
+ 	WHILE APR ID  MEN ID FPR ACH 
+ 		IF APR ID ACL ID FCL  MEN ID FPR ACH 
+ 			ID  ATR ID ACL ID FCL PEV 
+ 			ID  ATR ID PEV 
+ 		FCH 
+ 		ID  ATR ID SOM NUM PEV 
+ 	FCH 
+ 	RETURN ID PEV 
+ FCH 
  
- void ID ( int ID [ ] , int ID , int ID ) 
- { 	int ID ; int ID ; 
- 	ID  = ID ; 
- 	while ( ID  < ID - NUM ) { 
- 		int ID ; 
- 		ID  = ID ( ID , ID , ID ) ; 
- 		ID  = ID [ ID ] ; 
- 		ID [ ID ]  = ID [ ID ] ; 
- 		ID [ ID ]  = ID ; 
- 		ID  = ID + NUM ; 
- 	} 
- } 
+ VOID ID APR INT ID ACL FCL VIR INT ID VIR INT ID FPR 
+ ACH 	INT ID PEV INT ID PEV 
+ 	ID  ATR ID PEV 
+ 	WHILE APR ID  MEN ID SUB NUM FPR ACH 
+ 		INT ID PEV 
+ 		ID  ATR ID APR ID VIR ID VIR ID FPR PEV 
+ 		ID  ATR ID ACL ID FCL PEV 
+ 		ID ACL ID FCL  ATR ID ACL ID FCL PEV 
+ 		ID ACL ID FCL  ATR ID PEV 
+ 		ID  ATR ID SOM NUM PEV 
+ 	FCH 
+ FCH 
  
- void ID ( void ) 
- { 
- 	int ID ; 
- 	ID  = NUM ; 
- 	while ( ID  < NUM ) { 
- 		ID [ ID ]  = ID ( ) ; 
- 		ID  = ID + NUM ; 
- 	} 
- 	ID ( ID , NUM , NUM ) ; 
- 	ID  = NUM ; 
- 	while ( ID  < NUM ) { 
- 		ID ( ID [ ID ] ) ; 
- 		ID  = ID + NUM ; 
- 	} 
- } 
+ VOID ID APR VOID FPR 
+ ACH 
+ 	INT ID PEV 
+ 	ID  ATR NUM PEV 
+ 	WHILE APR ID  MEN NUM FPR ACH 
+ 		ID ACL ID FCL  ATR ID APR FPR PEV 
+ 		ID  ATR ID SOM NUM PEV 
+ 	FCH 
+ 	ID APR ID VIR NUM VIR NUM FPR PEV 
+ 	ID  ATR NUM PEV 
+ 	WHILE APR ID  MEN NUM FPR ACH 
+ 		ID APR ID ACL ID FCL FPR PEV 
+ 		ID  ATR ID SOM NUM PEV 
+ 	FCH 
+ FCH 
  
- 			int ID [ NUM ] ; 
+ 			INT ID ACL NUM FCL PEV 
  
- int ID ( int ID [ ] , int ID , int ID ) 
- { 	int ID ; int ID ; int ID ; 
- 	ID  = ID ; 
- 	ID  = ID [ ID ] ; 
- 	ID  = ID + NUM ; 
- 	while ( ID  < ID ) { 
- 		if ( ID [ ID ]  < ID ) { 
- 			ID  = ID [ ID ] ; 
- 			ID  = ID ; 
- 		} 
- 		ID  = ID + NUM ; 
- 	} 
- 	return ID ; 
- } 
+ INT ID APR INT ID ACL FCL VIR INT ID VIR INT ID FPR 
+ ACH 	INT ID PEV INT ID PEV INT ID PEV 
+ 	ID  ATR ID PEV 
+ 	ID  ATR ID ACL ID FCL PEV 
+ 	ID  ATR ID SOM NUM PEV 
+ 	WHILE APR ID  MEN ID FPR ACH 
+ 		IF APR ID ACL ID FCL  MEN ID FPR ACH 
+ 			ID  ATR ID ACL ID FCL PEV 
+ 			ID  ATR ID PEV 
+ 		FCH 
+ 		ID  ATR ID SOM NUM PEV 
+ 	FCH 
+ 	RETURN ID PEV 
+ FCH 
  
- void ID ( int ID [ ] , int ID , int ID ) 
- { 	int ID ; int ID ; 
- 	ID  = ID ; 
- 	while ( ID  < ID - NUM ) { 
- 		int ID ; 
- 		ID  = ID ( ID , ID , ID ) ; 
- 		ID  = ID [ ID ] ; 
- 		ID [ ID ]  = ID [ ID ] ; 
- 		ID [ ID ]  = ID ; 
- 		ID  = ID + NUM ; 
- 	} 
- } 
+ VOID ID APR INT ID ACL FCL VIR INT ID VIR INT ID FPR 
+ ACH 	INT ID PEV INT ID PEV 
+ 	ID  ATR ID PEV 
+ 	WHILE APR ID  MEN ID SUB NUM FPR ACH 
+ 		INT ID PEV 
+ 		ID  ATR ID APR ID VIR ID VIR ID FPR PEV 
+ 		ID  ATR ID ACL ID FCL PEV 
+ 		ID ACL ID FCL  ATR ID ACL ID FCL PEV 
+ 		ID ACL ID FCL  ATR ID PEV 
+ 		ID  ATR ID SOM NUM PEV 
+ 	FCH 
+ FCH 
  
- void ID ( void ) 
- { 
- 	int ID ; 
- 	ID  = NUM ; 
- 	while ( ID  < NUM ) { 
- 		ID [ ID ]  = ID ( ) ; 
- 		ID  = ID + NUM ; 
- 	} 
- 	ID ( ID , NUM , NUM ) ; 
- 	ID  = NUM ; 
- 	while ( ID  < NUM ) { 
- 		ID ( ID [ ID ] ) ; 
- 		ID  = ID + NUM ; 
- 	} 
- } 
+ VOID ID APR VOID FPR 
+ ACH 
+ 	INT ID PEV 
+ 	ID  ATR NUM PEV 
+ 	WHILE APR ID  MEN NUM FPR ACH 
+ 		ID ACL ID FCL  ATR ID APR FPR PEV 
+ 		ID  ATR ID SOM NUM PEV 
+ 	FCH 
+ 	ID APR ID VIR NUM VIR NUM FPR PEV 
+ 	ID  ATR NUM PEV 
+ 	WHILE APR ID  MEN NUM FPR ACH 
+ 		ID APR ID ACL ID FCL FPR PEV 
+ 		ID  ATR ID SOM NUM PEV 
+ 	FCH 
+ FCH 
  
  			
  
