@@ -1769,7 +1769,7 @@ int main(int argc, char *argv[]){
     int token, i;
     int *fileBuffer;
 
-    FILE *inputFile;
+    FILE *inputFile, *outputFile;
 
     fileBuffer = malloc(sizeof(int));
     fileBuffer[0] = 0;
@@ -1783,6 +1783,7 @@ int main(int argc, char *argv[]){
         }
     }
 
+    outputFile = fopen("saida.txt","w");
     i = 1;
     while((token = yylex()) != FIM){
         i++;
@@ -1798,36 +1799,36 @@ int main(int argc, char *argv[]){
     while (fileBuffer[i] != 0){
         switch(fileBuffer[i])
         {
-            case NUM: printf("NUM "); break;
-            case ID:  printf("ID ");  break;
-            case SOM: printf("+ ");   break;
-            case SUB: printf("- ");   break;
-            case MUL: printf("* ");   break;
-            case DIV: printf("/ ");   break;
-            case MEN: printf(" < ");  break;
-            case IME: printf(" <= "); break;
-            case MAI: printf(" > ");  break;
-            case IMA: printf(" >= "); break;
-            case IGL: printf(" == "); break;
-            case DIF: printf(" != "); break;
-            case ATR: printf(" = ");  break;
-            case PEV: printf("; ");   break;
-            case VIR: printf(", ");   break;
-            case APR: printf("( ");   break;
-            case FPR: printf(") ");   break;
-            case ACL: printf("[ ");   break;
-            case FCL: printf("] ");   break;
-            case ACH: printf("{ ");   break;
-            case FCH: printf("} ");   break;
-            case ENT: printf("\n ");  break;
-            case TAB: printf("\t");   break;
-            case ERR: printf("ERR "); break;
-            case ELSE: printf("else ");   break;
-            case IF: printf("if ");   break;
-            case INT: printf("int ");   break;
-            case RETURN: printf("return ");  break;
-            case VOID: printf("void "); break;
-            case WHILE: printf("while "); break;
+            case NUM: fprintf(outputFile,"NUM "); break;
+            case ID:  fprintf(outputFile,"ID ");  break;
+            case SOM: fprintf(outputFile,"+ ");   break;
+            case SUB: fprintf(outputFile,"- ");   break;
+            case MUL: fprintf(outputFile,"* ");   break;
+            case DIV: fprintf(outputFile,"/ ");   break;
+            case MEN: fprintf(outputFile," < ");  break;
+            case IME: fprintf(outputFile," <= "); break;
+            case MAI: fprintf(outputFile," > ");  break;
+            case IMA: fprintf(outputFile," >= "); break;
+            case IGL: fprintf(outputFile," == "); break;
+            case DIF: fprintf(outputFile," != "); break;
+            case ATR: fprintf(outputFile," = ");  break;
+            case PEV: fprintf(outputFile,"; ");   break;
+            case VIR: fprintf(outputFile,", ");   break;
+            case APR: fprintf(outputFile,"( ");   break;
+            case FPR: fprintf(outputFile,") ");   break;
+            case ACL: fprintf(outputFile,"[ ");   break;
+            case FCL: fprintf(outputFile,"] ");   break;
+            case ACH: fprintf(outputFile,"{ ");   break;
+            case FCH: fprintf(outputFile,"} ");   break;
+            case ENT: fprintf(outputFile,"\n ");  break;
+            case TAB: fprintf(outputFile,"\t");   break;
+            case ERR: fprintf(outputFile,"ERR "); break;
+            case ELSE: fprintf(outputFile,"else ");   break;
+            case IF: fprintf(outputFile,"if ");   break;
+            case INT: fprintf(outputFile,"int ");   break;
+            case RETURN: fprintf(outputFile,"return ");  break;
+            case VOID: fprintf(outputFile,"void "); break;
+            case WHILE: fprintf(outputFile,"while "); break;
         }
     i++;
     }
@@ -1836,6 +1837,7 @@ int main(int argc, char *argv[]){
 
     free(fileBuffer);
     fclose(inputFile);
+    fclose(outputFile);
 
     return (0);
 }

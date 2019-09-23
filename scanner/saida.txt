@@ -1,0 +1,232 @@
+int ID [ NUM ] ; 
+ 
+ int ID ( int ID [ ] , int ID , int ID ) 
+ { 	int ID ; int ID ; int ID ; 
+ 	ID  = ID ; 
+ 	ID  = ID [ ID ] ; 
+ 	ID  = ID + NUM ; 
+ 	while ( ID  < ID ) { 
+ 		if ( ID [ ID ]  < ID ) { 
+ 			ID  = ID [ ID ] ; 
+ 			ID  = ID ; 
+ 		} 
+ 		ID  = ID + NUM ; 
+ 	} 
+ 	return ID ; 
+ } 
+ 
+ void ID ( int ID [ ] , int ID , int ID ) 
+ { 	int ID ; int ID ; 
+ 	ID  = ID ; 
+ 	while ( ID  < ID - NUM ) { 
+ 		int ID ; 
+ 		ID  = ID ( ID , ID , ID ) ; 
+ 		ID  = ID [ ID ] ; 
+ 		ID [ ID ]  = ID [ ID ] ; 
+ 		ID [ ID ]  = ID ; 
+ 		ID  = ID + NUM ; 
+ 	} 
+ } 
+ 
+ void ID ( void ) 
+ { 
+ 	int ID ; 
+ 	ID  = NUM ; 
+ 	while ( ID  < NUM ) { 
+ 		ID [ ID ]  = ID ( ) ; 
+ 		ID  = ID + NUM ; 
+ 	} 
+ 	ID ( ID , NUM , NUM ) ; 
+ 	ID  = NUM ; 
+ 	while ( ID  < NUM ) { 
+ 		ID ( ID [ ID ] ) ; 
+ 		ID  = ID + NUM ; 
+ 	} 
+ } 
+ 
+ int ID [ NUM ] ; 
+ 
+ int ID ( int ID [ ] , int ID , int ID ) 
+ { 	int ID ; int ID ; int ID ; 
+ 	ID  = ID ; 
+ 	ID  = ID [ ID ] ; 
+ 	ID  = ID + NUM ; 
+ 	while ( ID  < ID ) { 
+ 		if ( ID [ ID ]  < ID ) { 
+ 			ID  = ID [ ID ] ; 
+ 			ID  = ID ; 
+ 		} 
+ 		ID  = ID + NUM ; 
+ 	} 
+ 	return ID ; 
+ } 
+ 
+ void ID ( int ID [ ] , int ID , int ID ) 
+ { 	int ID ; int ID ; 
+ 	ID  = ID ; 
+ 	while ( ID  < ID - NUM ) { 
+ 		int ID ; 
+ 		ID  = ID ( ID , ID , ID ) ; 
+ 		ID  = ID [ ID ] ; 
+ 		ID [ ID ]  = ID [ ID ] ; 
+ 		ID [ ID ]  = ID ; 
+ 		ID  = ID + NUM ; 
+ 	} 
+ } 
+ 
+ void ID ( void ) 
+ { 
+ 	int ID ; 
+ 	ID  = NUM ; 
+ 	while ( ID  < NUM ) { 
+ 		ID [ ID ]  = ID ( ) ; 
+ 		ID  = ID + NUM ; 
+ 	} 
+ 	ID ( ID , NUM , NUM ) ; 
+ 	ID  = NUM ; 
+ 	while ( ID  < NUM ) { 
+ 		ID ( ID [ ID ] ) ; 
+ 		ID  = ID + NUM ; 
+ 	} 
+ } 
+ 
+ 			int ID [ NUM ] ; 
+ 
+ int ID ( int ID [ ] , int ID , int ID ) 
+ { 	int ID ; int ID ; int ID ; 
+ 	ID  = ID ; 
+ 	ID  = ID [ ID ] ; 
+ 	ID  = ID + NUM ; 
+ 	while ( ID  < ID ) { 
+ 		if ( ID [ ID ]  < ID ) { 
+ 			ID  = ID [ ID ] ; 
+ 			ID  = ID ; 
+ 		} 
+ 		ID  = ID + NUM ; 
+ 	} 
+ 	return ID ; 
+ } 
+ 
+ void ID ( int ID [ ] , int ID , int ID ) 
+ { 	int ID ; int ID ; 
+ 	ID  = ID ; 
+ 	while ( ID  < ID - NUM ) { 
+ 		int ID ; 
+ 		ID  = ID ( ID , ID , ID ) ; 
+ 		ID  = ID [ ID ] ; 
+ 		ID [ ID ]  = ID [ ID ] ; 
+ 		ID [ ID ]  = ID ; 
+ 		ID  = ID + NUM ; 
+ 	} 
+ } 
+ 
+ void ID ( void ) 
+ { 
+ 	int ID ; 
+ 	ID  = NUM ; 
+ 	while ( ID  < NUM ) { 
+ 		ID [ ID ]  = ID ( ) ; 
+ 		ID  = ID + NUM ; 
+ 	} 
+ 	ID ( ID , NUM , NUM ) ; 
+ 	ID  = NUM ; 
+ 	while ( ID  < NUM ) { 
+ 		ID ( ID [ ID ] ) ; 
+ 		ID  = ID + NUM ; 
+ 	} 
+ } 
+ 
+ 			int ID [ NUM ] ; 
+ 
+ int ID ( int ID [ ] , int ID , int ID ) 
+ { 	int ID ; int ID ; int ID ; 
+ 	ID  = ID ; 
+ 	ID  = ID [ ID ] ; 
+ 	ID  = ID + NUM ; 
+ 	while ( ID  < ID ) { 
+ 		if ( ID [ ID ]  < ID ) { 
+ 			ID  = ID [ ID ] ; 
+ 			ID  = ID ; 
+ 		} 
+ 		ID  = ID + NUM ; 
+ 	} 
+ 	return ID ; 
+ } 
+ 
+ void ID ( int ID [ ] , int ID , int ID ) 
+ { 	int ID ; int ID ; 
+ 	ID  = ID ; 
+ 	while ( ID  < ID - NUM ) { 
+ 		int ID ; 
+ 		ID  = ID ( ID , ID , ID ) ; 
+ 		ID  = ID [ ID ] ; 
+ 		ID [ ID ]  = ID [ ID ] ; 
+ 		ID [ ID ]  = ID ; 
+ 		ID  = ID + NUM ; 
+ 	} 
+ } 
+ 
+ void ID ( void ) 
+ { 
+ 	int ID ; 
+ 	ID  = NUM ; 
+ 	while ( ID  < NUM ) { 
+ 		ID [ ID ]  = ID ( ) ; 
+ 		ID  = ID + NUM ; 
+ 	} 
+ 	ID ( ID , NUM , NUM ) ; 
+ 	ID  = NUM ; 
+ 	while ( ID  < NUM ) { 
+ 		ID ( ID [ ID ] ) ; 
+ 		ID  = ID + NUM ; 
+ 	} 
+ } 
+ 
+ 			int ID [ NUM ] ; 
+ 
+ int ID ( int ID [ ] , int ID , int ID ) 
+ { 	int ID ; int ID ; int ID ; 
+ 	ID  = ID ; 
+ 	ID  = ID [ ID ] ; 
+ 	ID  = ID + NUM ; 
+ 	while ( ID  < ID ) { 
+ 		if ( ID [ ID ]  < ID ) { 
+ 			ID  = ID [ ID ] ; 
+ 			ID  = ID ; 
+ 		} 
+ 		ID  = ID + NUM ; 
+ 	} 
+ 	return ID ; 
+ } 
+ 
+ void ID ( int ID [ ] , int ID , int ID ) 
+ { 	int ID ; int ID ; 
+ 	ID  = ID ; 
+ 	while ( ID  < ID - NUM ) { 
+ 		int ID ; 
+ 		ID  = ID ( ID , ID , ID ) ; 
+ 		ID  = ID [ ID ] ; 
+ 		ID [ ID ]  = ID [ ID ] ; 
+ 		ID [ ID ]  = ID ; 
+ 		ID  = ID + NUM ; 
+ 	} 
+ } 
+ 
+ void ID ( void ) 
+ { 
+ 	int ID ; 
+ 	ID  = NUM ; 
+ 	while ( ID  < NUM ) { 
+ 		ID [ ID ]  = ID ( ) ; 
+ 		ID  = ID + NUM ; 
+ 	} 
+ 	ID ( ID , NUM , NUM ) ; 
+ 	ID  = NUM ; 
+ 	while ( ID  < NUM ) { 
+ 		ID ( ID [ ID ] ) ; 
+ 		ID  = ID + NUM ; 
+ 	} 
+ } 
+ 
+ 			
+ 
