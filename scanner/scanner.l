@@ -102,7 +102,37 @@ OUTRO [^0-9a-zA-Z";""-""/""=""\""+""*""("")""{""}""\[""\]"",""\n""\t""<""<="">""
 
 %%
 
+void exp(){
+    termo();
+    while((tok=='+')||(tok=='-')){
+        eat(tok);
+        termo();
+    }
+}
+
+void termo(){
+    fator();
+    while((tok=='*')||(tok=='/')){
+        eat(tok);
+        fator();
+    }
+}
+
+void fator(){
+    switch(tok){
+        case ( :
+            eat(();
+            exp();
+            eat());
+        case NUM :
+            eat(NUM);
+        default:
+            ERRO();
+    }
+}
+
 int main(int argc, char *argv[]){
+/*
     int token, i;
     int *fileBuffer;
 
@@ -177,6 +207,9 @@ int main(int argc, char *argv[]){
     free(fileBuffer);
     fclose(inputFile);
     fclose(outputFile);
+*/
+    advance();
+    exp();
 
     return (0);
 }
