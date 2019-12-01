@@ -1,6 +1,0 @@
-#!/bin/bash
-
-bison -d parser.y
-flex scanner.l
-gcc -c lex.yy.c
-g++ -o acc lex.yy.o parser.tab.c -ly -lfl
