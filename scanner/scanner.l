@@ -5,45 +5,11 @@
  *Talita Ludmila de Lima    120895
 */
 
-#include <stdlib.h>
-#include <stdio.h>
+#include "parser.tab.h"
+#include "globals.h"
+#include "util.h"
+//#include "scan.h"
 
-#define NUM 300
-#define ID  301
-#define SOM 302
-#define SUB 303
-#define MUL 304
-#define DIV 305
-#define MEN 306 
-#define IME 307
-#define MAI 308
-#define IMA 309
-#define IGL 310
-#define DIF 311
-#define ATR 312
-#define PEV 313
-#define VIR 314
-#define APR 315
-#define FPR 316
-#define ACL 317
-#define FCL 318
-#define ACH 319
-#define FCH 320 
-#define ACM 321
-#define FCM 322
-#define FIM 323
-#define ERR 324
-#define ENT 325
-#define TAB 326
-#define ELSE 327
-#define IF 328
-#define INT 329
-#define RETURN 330
-#define VOID 331
-#define WHILE 332
-#define COM 333
-
-int num_linhas=1;
 %}
 
 DIGITO [0-9]
@@ -63,7 +29,7 @@ OUTRO [^0-9a-zA-Z";""-""/""=""\""+""*""("")""{""}""\[""\]"",""\n""\t""<""<="">""
                 d=c;
                 c = input();
                 if(c==EOF) break;
-                if(c=='\n') num_linhas++;
+                if(c=='\n') lineno++;
             }while(!(d == '*' && c == '/'));
         }
     }
@@ -73,7 +39,10 @@ OUTRO [^0-9a-zA-Z";""-""/""=""\""+""*""("")""{""}""\[""\]"",""\n""\t""<""<="">""
 "return"        return RETURN;
 "void"          return VOID;
 "while"         return WHILE;
-{DIGITO}+		return NUM;
+{DIGITO}+		{   
+                    yylval = atoi(yytext);
+                    return NUM;
+                }
 {LETRA}({LETRA})*	return ID;
 "+"		    	return SOM;
 "-" 	    	return SUB;
@@ -95,13 +64,14 @@ OUTRO [^0-9a-zA-Z";""-""/""=""\""+""*""("")""{""}""\[""\]"",""\n""\t""<""<="">""
 "{"             return ACH;
 "}"             return FCH;
 <<EOF>>         return FIM;
-[\n]            {num_linhas++; return ENT;}
+[\n]            {lineno++; return ENT;}
 [\t]            return TAB;
 [ ]+
 {OUTRO}+		return ERR;
 
 %%
 
+<<<<<<< Updated upstream
 void exp(){
     termo();
     while((tok=='+')||(tok=='-')){
@@ -212,4 +182,22 @@ int main(int argc, char *argv[]){
     exp();
 
     return (0);
+=======
+TokenType getToken(void)
+{ static int firstTime = TRUE;
+  TokenType currentToken;
+  if (firstTime)
+  { firstTime = FALSE;
+    lineno++;
+    yyin = source;
+    yyout = listing;
+  }
+  currentToken = yylex();
+  strncpy(tokenString,yytext,MAXTOKENLEN);
+  if (TraceScan) {
+    fprintf(listing,"\t%d: ",lineno);
+    printToken(currentToken,tokenString);
+  }
+  return currentToken;
+>>>>>>> Stashed changes
 }
