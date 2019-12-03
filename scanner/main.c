@@ -6,6 +6,7 @@
 /****************************************************/
 
 #include "globals.h"
+#include "symboltable.h"
 
 /* set NO_PARSE to TRUE to get a scanner-only compiler */
 #define NO_PARSE FALSE
@@ -19,13 +20,13 @@
 
 #include "util.h"
 #if NO_PARSE
-//#include "scan.h"
+#include "scan.h"
 #else
-//#include "parse.h"
+#include "parse.h"
 #if !NO_ANALYZE
-//#include "analyze.h"
+#include "analyze.h"
 #if !NO_CODE
-//#include "cgen.h"
+#include "cgen.h"
 #endif
 #endif
 #endif
@@ -37,16 +38,20 @@ FILE * listing;
 FILE * code;
 
 /* allocate and set tracing flags */
-int EchoSource = FALSE;
+int EchoSource = TRUE;
 int TraceScan = FALSE;
-int TraceParse = FALSE;
-int TraceAnalyze = FALSE;
+int TraceParse = TRUE;
+int TraceAnalyze = TRUE;
 int TraceCode = FALSE;
 
 int Error = FALSE;
 
-main( int argc, char * argv[] )
+Scope globalScope;
+
+int main( int argc, char * argv[] )
 { TreeNode * syntaxTree;
+  globalScope = (Scope) malloc(sizeof(Scope));
+  globalScope = newScope("global");
   char pgm[120]; /* source code file name */
   if (argc != 2)
     { fprintf(stderr,"usage: %s <filename>\n",argv[0]);
@@ -61,7 +66,7 @@ main( int argc, char * argv[] )
     exit(1);
   }
   listing = stdout; /* send listing to screen */
-  fprintf(listing,"\nTINY COMPILATION: %s\n",pgm);
+  fprintf(listing,"\nCompilação C-: %s\n",pgm);
 #if NO_PARSE
   while (getToken()!=ENDFILE);
 #else
@@ -82,8 +87,8 @@ main( int argc, char * argv[] )
   if (! Error)
   { char * codefile;
     int fnlen = strcspn(pgm,".");
-    codefile = (char *) calloc(fnlen+4, sizeof(char));
     strncpy(codefile,pgm,fnlen);
+    codefile = (char *) calloc(fnlen+4, sizeof(char));
     strcat(codefile,".tm");
     code = fopen(codefile,"w");
     if (code == NULL)

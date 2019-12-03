@@ -72,9 +72,9 @@ typedef enum {Void,Integer,IntegerArray} ExpType;
 
 #define MAXCHILDREN 3
 
-typedef struct ArrayAttribute {
 struct ScopeListRec;
 
+typedef struct ArrayAttribute {
   TokenType type;
   char * name;
   int size;
@@ -87,6 +87,7 @@ typedef struct treeNode
      NodeKind nodekind;
      union { StmtKind stmt; ExpKind exp; DeclKind decl;} kind;
      union { TokenType op;
+             TokenType type;
              int val;
              char * name; 
              ArrAttr arr;

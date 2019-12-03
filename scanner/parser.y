@@ -3,14 +3,16 @@
 
     #include "globals.h"
     #include "util.h"
-    //#include "scan.h"
-    //#include "parse.h"
+    #include "scan.h"
+    #include "parse.h"
 
     #define YYSTYPE TreeNode *
     static char * savedName;
     static int savedLineNo;
     static TreeNode * savedTree;
     static int savedNumber;
+
+    char tokenString[MAXTOKENLEN+1];
 
     static int yylex(void);
     int yyerror(char * message);
