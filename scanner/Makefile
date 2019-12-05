@@ -1,4 +1,4 @@
-# Makefile for Cbassier compiler
+# Makefile for C- compiler
 
 CC = gcc
 BISON = bison
@@ -27,7 +27,7 @@ lex.yy.o: scanner.l scan.h util.h globals.h
 	$(LEX) -o lex.yy.c scanner.l
 	$(CC) -c lex.yy.c
 
-cbassier.tab.o: parser.y globals.h
+parser.tab.o: parser.y globals.h
 	$(BISON) -d parser.y
 	$(CC) -c parser.tab.c
 

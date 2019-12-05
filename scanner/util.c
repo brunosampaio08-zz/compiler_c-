@@ -125,7 +125,7 @@ char * copyString(char * s)
 /* Variable indentno is used by printTree to
  * store current number of spaces to indent
  */
-static indentno = 0;
+static int indentno = 0;
 
 /* macros to increase/decrease indentation */
 #define INDENT indentno+=2
@@ -138,7 +138,7 @@ static void printSpaces(void)
     fprintf(listing," ");
 }
 
-/* printType print types of funcions and variables */
+/* printType print types of functions and variables */
 void printTypes(TreeNode* tree) {
   if (tree->child[0] != NULL) {
     switch (tree->child[0]->type) {
@@ -188,13 +188,13 @@ void printTree( TreeNode * tree )
           fprintf(listing, "While\n");
           break;
         case CompoundK:
-          fprintf(listing, "Compound statement\n");
+          fprintf(listing, "Declaracao composta\n");
           break;
         case ReturnK:
           fprintf(listing, "Return\n");
           break;
         case AssignK:
-          fprintf(listing, "Assign\n");
+          fprintf(listing, "Atribuicao\n");
           break;
         default:
           fprintf(listing, "Unknown stmtNode kind\n");
@@ -220,10 +220,10 @@ void printTree( TreeNode * tree )
           fprintf(listing,"ArrId \n");
           break;
         case CallK:
-          fprintf(listing, "Call Function : %s\n", tree->attr.name);
+          fprintf(listing, "Chamada de funcao: %s\n", tree->attr.name);
           break;
         case CalcK:
-          fprintf(listing, "Operator : ");
+          fprintf(listing, "Operador : ");
           printToken(tree->child[1]->attr.op, "\0");
           break;
         default:
@@ -236,25 +236,25 @@ void printTree( TreeNode * tree )
       printSpaces();
       switch (tree->kind.decl) {
         case FunK :
-          fprintf(listing, "Function Declaration:  ");
+          fprintf(listing, "Declaracao de funcao:  ");
           printTypes(tree);
           fprintf(listing, " %s()\n", tree->attr.name);
           break;
         case VarK :
-          fprintf(listing, "Variable Declaration:  ");
+          fprintf(listing, "Declaracao de variavel:  ");
           printTypes(tree);
           fprintf(listing, " %s;\n", tree->attr.name);
           break;
         case ArrVarK :
-          fprintf(listing, "Array Variable Declaration:  ");
+          fprintf(listing, "Declaracao de Vetor:  ");
           printTypes(tree);
           fprintf(listing," %s[%d];\n", tree->attr.arr.name, tree->attr.arr.size);
           break;
         case ArrParamK :
-          fprintf(listing, "Array Parameter: %s\n", tree->attr.name);
+          fprintf(listing, "Parametro Vetor: %s\n", tree->attr.name);
           break;
         case ParamK :
-          fprintf(listing, "Parameter: ");
+          fprintf(listing, "Parametro: ");
           printTypes(tree);
           if (tree->attr.name != NULL) {
             fprintf(listing, " %s\n", tree->attr.name);

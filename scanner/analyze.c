@@ -11,6 +11,8 @@
 #include "util.h"
 #include "symboltable.h"
 
+int isMainDeclared = 0;
+
 /*
  * To insert to symbol table build-in functions
  * int input()   // One integer value is input from the user.
@@ -113,9 +115,9 @@ static void popAfterInsertProc(TreeNode * t) {
 }
 
 static void symbolError(TreeNode * t, char * message) {
-  fprintf(listing,"Symbol Table error at line %d: %s\n", t->lineno, message);
+  fprintf(listing,"ERRO SEMANTICO: Linha: %d: %s\n", t->lineno, message);
   Error = TRUE;
-  exit(-1);
+  //exit(-1);
 }
 
 // this is needed to check parameters
@@ -155,7 +157,7 @@ static void insertNode( TreeNode * t)
         case CallK: {
           // check undeclation
           if (st_lookup_all_scope(t->attr.name) == NULL){
-            symbolError(t, "Undefined Symbol");
+            symbolError(t, "Simbolo nao definido");
           } else {
             BucketList list = st_lookup_all_scope(t->attr.name);
             t->type = list->type;
@@ -174,10 +176,9 @@ static void insertNode( TreeNode * t)
         case FunK: {
           // initialize location counter
           locationCounter = 0;
-
           /* Look up scope list to check scope existence */
           if (st_lookup_scope(t->attr.name) != NULL) {
-            symbolError(t, "Redefinition of function");
+            symbolError(t, "Redefinicao de funcao");
             break;
           }
 
@@ -196,13 +197,18 @@ static void insertNode( TreeNode * t)
         case VarK: {
           /* Look up to check variable existence */
           if (st_lookup(t->attr.name) != NULL) {
-            symbolError(t, "Redefinition of variable");
+            symbolError(t, "Redefinicao de variavel");
+            break;
+          }
+
+          if(st_lookup_scope(t->attr.name) != NULL){
+            symbolError(t, "Declaracao Invalida");
             break;
           }
 
           // Type Checking : Type should not be void
           if (t->child[0]->type == Void) {
-            symbolError(t, "Variable should not be void type.");
+            symbolError(t, "Variavel nao deveria ser do tipo VOID");
             break;
           }
 
@@ -213,19 +219,23 @@ static void insertNode( TreeNode * t)
         //Array case
         case ArrVarK: {
 
-          // Type Checing : Type should not be void
+          // Type Checking : Type should not be void
           if (t->child[0]->type == Void) {
-            symbolError(t, "Redefinition of Array variable");
+            symbolError(t, "Tipo invalido");
+            break;
+          }
+
+          if(st_lookup_scope(t->attr.arr.name) != NULL){
+            symbolError(t, "Declaracao invalida");
             break;
           }
 
           /*  Look up to check array variable existence  */
           if (st_lookup(t->attr.arr.name) != NULL) {
-            symbolError(t, "Array Variable has already declared.");
+            symbolError(t, "Vetor ja foi declarado");
             break;
           }
-
-          st_insert(currScope()->name, t->attr.arr.name, t->child[0]->type, t, locationCounter++);
+          st_insert(currScope()->name, t->attr.arr.name, t->type, t, locationCounter++);
           break;
         }
 
@@ -234,17 +244,22 @@ static void insertNode( TreeNode * t)
 
           // Type Checking : Type should not be void
           if (t->child[0]->type == Void) {
-            symbolError(t, "Array Parameter should not be void type.");
+            symbolError(t, "Tipo invalido");
+            break;
+          }
+
+          if(st_lookup_scope(t->attr.name) != NULL){
+            symbolError(t, "Declaracao invalida");
             break;
           }
 
           /*  Look up to check array parameter existence  */
           if (st_lookup(t->attr.name) != NULL) {
-            symbolError(t, "Redefinition of Array Parameter");
+            symbolError(t, "Redefinicao de um parametro vetor");
             break;
           }
 
-          st_insert(currScope()->name, t->attr.name, t->child[0]->type, t, locationCounter++);
+          st_insert(currScope()->name, t->attr.name, t->type, t, locationCounter++);
           break;
         }
 
@@ -253,8 +268,18 @@ static void insertNode( TreeNode * t)
 
           if (t->attr.name != NULL) {
             /*  Look up to check parameter existence  */
+            if(t->child[0]->type == Void){
+              symbolError(t, "Tipo invalido");
+              break;
+            }
+            
+            if(st_lookup_scope(t->attr.name) != NULL){
+              symbolError(t, "Declaracao invalida");
+              break;
+            }
+            
             if (st_lookup(t->attr.name) != NULL) {
-              symbolError(t, "Redefinition of Parameter");
+              symbolError(t, "Redefinicao de parametro");
               break;
             }
 
@@ -287,6 +312,11 @@ void buildSymtab(TreeNode * syntaxTree)
 
   traverse(syntaxTree, insertNode, popAfterInsertProc);
   popScope();
+
+  if(st_lookup_scope("main") == NULL){
+    fprintf(listing, "\nERRO SEMANTICO: Main nao declarada!\n");
+  }
+
   if (TraceAnalyze) 
   {
     printSymTab(listing);
@@ -294,29 +324,36 @@ void buildSymtab(TreeNode * syntaxTree)
 }
 
 static void typeError(TreeNode * t, char * message)
-{ fprintf(listing,"Type error at line %d: %s\n",t->lineno,message);
+{ fprintf(listing,"Erro de tipo na linha %d: %s\n",t->lineno,message);
   Error = TRUE;
-  exit(-1);
+  //exit(-1);
 }
 
 /* Procedure checkNode performs
  * type checking at a single tree node
  */
 static void checkNode(TreeNode * t)
-{ switch (t->nodekind)
+{ 
+  switch (t->nodekind)
   {
     case StmtK:
       switch (t->kind.stmt)
       { 
         case AssignK: {
           // Verify the type match of two operands when assigning.
-          if (t->child[0]->attr.arr.type == IntegerArray) {
-            typeError(t->child[0], "Assignment to Integer Array Variable");
+          if (t->child[0]->type == IntegerArray) {
+            if(t->child[0]->child[0] == NULL){
+              typeError(t->child[0], "Atribuicao para uma variavel do tipo vetor");
+            }
           }
-
           if (t->child[0]->attr.arr.type == Void) {
-            typeError(t->child[0], "Assignment to Void Variable");
+            typeError(t->child[0], "Atribuicao para uma variavel do tipo VOID");
           }
+          /*if(t->child[1]->child[1] != NULL){
+            if(t->child[1]->child[0]->type == Void){
+              typeError(t->child[1], "Atribuicao de uma funcao do tipo VOID");
+            }
+          }*/
           break;
         }
         case ReturnK: {
@@ -325,9 +362,9 @@ static void checkNode(TreeNode * t)
           const TreeNode * expr = t->child[0];
 
           if (funcType == Void && (expr != NULL && expr->type != Void)) {
-              typeError(t,"expected no return value");
+              typeError(t,"Retorno vazio era esperado");
             } else if (funcType == Integer && (expr == NULL || expr->type == Void)) {
-              typeError(t,"expected return value");
+              typeError(t,"Retorno esperado");
             }
         }
         default:

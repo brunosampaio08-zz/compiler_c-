@@ -186,19 +186,19 @@ void printSymTabRows(Scope scope)
           case DeclK:
           switch (node->kind.decl) {
             case FunK:
-            fprintf(listing, "Function         ");
+            fprintf(listing, "Funcao         ");
             break;
             case VarK:
-            fprintf(listing, "Variable         ");
+            fprintf(listing, "Variavel         ");
             break;
             case ArrVarK:
-            fprintf(listing, "Array Variable   ");
+            fprintf(listing, "Vetor          ");
             break;
             case ParamK:
-            fprintf(listing, "Parameter        ");
+            fprintf(listing, "Parametro        ");
             break;
             case ArrParamK:
-            fprintf(listing, "Array Parameter  ");
+            fprintf(listing, "Parametro Vetor  ");
             break;
             default:
             break;
@@ -213,10 +213,10 @@ void printSymTabRows(Scope scope)
           fprintf(listing, "Void          ");
           break;
           case Integer:
-          fprintf(listing, "Integer       ");
+          fprintf(listing, "Integer        ");
           break;
           case IntegerArray:
-          fprintf(listing, "Integer Array ");
+          fprintf(listing, "Vetor de Integers ");
           break;
           default:
           break;
@@ -239,15 +239,15 @@ void printSymTabRows(Scope scope)
 void printSymTab(FILE * listing) {
 
   fprintf(listing, "\n------------------\n");
-  fprintf(listing, "|  Symbol table  |");
+  fprintf(listing, "|  Tabela de simbolos  |");
   fprintf(listing, "\n------------------\n\n");
 
   for (int i = 0; i<sizeOfList; ++i) {
     Scope scope = scopeList[i];
     if (scope->nestedLevel > 0) continue;
-    fprintf(listing, "Scope Name : %s\n", scope->name);
+    fprintf(listing, "Escopo : %s\n", scope->name);
     fprintf(listing, "---------------------------------------------------------------------------\n");
-    fprintf(listing, "Name       Type             Data Type     Line Numbers \n");
+    fprintf(listing, "Nome       Tipo             Tipo de Dado     Número das linhas \n");
     fprintf(listing, "---------  ---------------  ------------  ----------------------\n");
     printSymTabRows(scope);
     fprintf(listing, "---------------------------------------------------------------------------\n");

@@ -18,9 +18,10 @@ int minloc ( int a[], int low, int high )
 	return k;
 }
 
-void sort( int a[], int low, int high)
+void sort( void k, int a[], int low, int high)
 {	int i; int k;
 	i = low;
+    a = 10;
 	while (i < high-1){
 		int t;
 		k = minloc(a,i,high);
@@ -31,20 +32,22 @@ void sort( int a[], int low, int high)
 	}
 }
 
+void talita(void){
+
+}
+
 void main(void)
 {
 	int i;
-	i = 0;
+	i = talita();
 	while (i < 10){
-		vet[i] = input();
+		vet[10] = 10;
 		i = i + 1;
 	}
 	sort(vet,0,10);
 	i = 0;
-	while (i < 10){
 		output(vet[i]);
+	while (i < 10){
 		i = i + 1;
 	}
 }
-
-			
