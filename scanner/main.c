@@ -38,7 +38,7 @@ FILE * listing;
 FILE * code;
 
 /* allocate and set tracing flags */
-int EchoSource = TRUE;
+int EchoSource = FALSE;
 int TraceScan = FALSE;
 int TraceParse = TRUE;
 int TraceAnalyze = TRUE;
@@ -59,7 +59,7 @@ int main( int argc, char * argv[] )
     }
   strcpy(pgm,argv[1]) ;
   if (strchr (pgm, '.') == NULL)
-     strcat(pgm,".tny");
+     strcat(pgm,".cm");
   source = fopen(pgm,"r");
   if (source==NULL)
   { fprintf(stderr,"File %s not found\n",pgm);
@@ -79,9 +79,11 @@ int main( int argc, char * argv[] )
   if (! Error)
   { if (TraceAnalyze) fprintf(listing,"\nConstruindo a tabela de simbolos...\n");
     buildSymtab(syntaxTree);
-    if (TraceAnalyze) fprintf(listing,"\nChecando tipos...\n");
-    typeCheck(syntaxTree);
-    if (TraceAnalyze) fprintf(listing,"\nChecagem de tipos concluida\n");
+    if(st_lookup_scope("main") != NULL){
+      if (TraceAnalyze) fprintf(listing,"\nChecando tipos...\n");
+      typeCheck(syntaxTree);
+      if (TraceAnalyze) fprintf(listing,"\nChecagem de tipos concluida\n");
+    }
   }
 #if !NO_CODE
   if (! Error)

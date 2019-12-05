@@ -7,10 +7,10 @@
     #include "parse.h"
 
     #define YYSTYPE TreeNode *
-    static char * savedName;
-    static int savedLineNo;
-    static TreeNode * savedTree;
-    static int savedNumber;
+    static char * savedName; //names for use
+    static int savedLineNo; //line number for use
+    static TreeNode * savedTree; //tree to be returned
+    static int savedNumber; //value for use
 
     char tokenString[MAXTOKENLEN+1];
 

@@ -11,8 +11,6 @@
 #include "util.h"
 #include "symboltable.h"
 
-int isMainDeclared = 0;
-
 /*
  * To insert to symbol table build-in functions
  * int input()   // One integer value is input from the user.
