@@ -775,7 +775,7 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 YY_RULE_SETUP
 #line 26 "scanner.l"
-{   
+{
         char c;
         char d;
         c = input();
@@ -785,7 +785,7 @@ YY_RULE_SETUP
             {
                 d=c;
                 c = input();
-                if(c==EOF) break;
+                if(c==EOF) return ERR;
                 if(c=='\n') lineno++;
             }while(!(d == '*' && c == '/'));
         }
@@ -1971,7 +1971,7 @@ TokenType getToken(void)
   if (TraceScan) 
   {
     fprintf(listing,"\t%d: ",lineno);
-    printToken(currentToken,tokenString);
+    printToken(0, currentToken,tokenString);
   }
   return currentToken;
 }

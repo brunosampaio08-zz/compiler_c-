@@ -76,7 +76,7 @@ tipo-especificador: INT{
                         $$->type = Void;
                     };
 
-fun-declaracao: tipo-especificador id{
+fun-declaracao: tipo-especificador id {
                                         $$ = newDeclNode(FunK);
                                         $$->lineno = lineno;
                                         $$->attr.name = savedName;
@@ -151,7 +151,7 @@ statement-lista: statement-lista statement{
                     }
                 } | {
                     $$ = NULL;
-                };
+                } | error {yyerrok;};
 
 statement: expressao-decl{
                 $$ = $1;
@@ -329,9 +329,9 @@ num: NUM{
 %%
 
 int yyerror(char * message){
-    fprintf(listing, "ERRO SINTÁTICO: ");
-    printToken(yychar, tokenString);    
-    fprintf(listing, " LINHA: %d", lineno);
+    fprintf(errorfile, "ERRO SINTÁTICO: ");
+    printToken(1, yychar, tokenString);    
+    fprintf(errorfile, " LINHA: %d\n", lineno);
     Error = TRUE;
     return 0;
 }

@@ -9,44 +9,85 @@
 #include "globals.h"
 #include "util.h"
 
+FILE * errorfile;
+
 /* Procedure printToken prints a token 
  * and its lexeme to the listing file
  */
-void printToken( TokenType token, const char* tokenString )
-{ switch (token)
-  { case ELSE:
-    case IF:
-    case INT:
-    case RETURN:
-    case VOID:
-    case WHILE:
-    fprintf(listing, "reserved word: %s\n",tokenString);
-    break;
-    case SOM:     fprintf(listing, "+\n");  break;
-    case SUB:    fprintf(listing, "-\n");  break;
-    case MUL:    fprintf(listing, "*\n");  break;
-    case DIV:     fprintf(listing, "/\n");  break;
-    case MEN:       fprintf(listing, "<\n");  break;
-    case IME:       fprintf(listing, "<=\n"); break;
-    case MAI:       fprintf(listing, ">\n");  break;
-    case IMA:       fprintf(listing, ">=\n"); break;
-    case IGL:       fprintf(listing, "==\n"); break;
-    case DIF:       fprintf(listing, "!=\n"); break;
-    case ATR:   fprintf(listing, "=\n");  break;
-    case PEV:     fprintf(listing, ";\n");  break;
-    case VIR:    fprintf(listing, ",\n");  break;
-    case APR:   fprintf(listing, "(\n");  break;
-    case FPR:   fprintf(listing, ")\n");  break;
-    case ACL: fprintf(listing, "[\n");  break;
-    case FCL: fprintf(listing, "]\n");  break;
-    case ACH:   fprintf(listing, "{\n");  break;
-    case FCH:   fprintf(listing, "}\n");  break;
-    case ENDFILE:  fprintf(listing,"%s %s\n",  "ENDFILE", "EOF"); break;
-    case NUM: fprintf(listing, "NUM, val = %s\n",tokenString); break;
-    case ID: fprintf(listing, "ID, name = %s\n",tokenString); break;
-    case ERR: fprintf(listing, "ERROR: %s\n",tokenString); break;
-    default: /* should never happen */
-       fprintf(listing,"Unknown token: %d\n",token);
+void printToken(int arq, TokenType token, const char* tokenString )
+{ 
+  if(arq == 1){
+    switch (token)
+    { case ELSE:
+      case IF:
+      case INT:
+      case RETURN:
+      case VOID:
+      case WHILE:
+      fprintf(errorfile, "reserved word: %s ",tokenString);
+      break;
+      case SOM:     fprintf(errorfile, "+ ");  break;
+      case SUB:    fprintf(errorfile, "- ");  break;
+      case MUL:    fprintf(errorfile, "* ");  break;
+      case DIV:     fprintf(errorfile, "/ ");  break;
+      case MEN:       fprintf(errorfile, "< ");  break;
+      case IME:       fprintf(errorfile, "<= "); break;
+      case MAI:       fprintf(errorfile, "> ");  break;
+      case IMA:       fprintf(errorfile, ">= "); break;
+      case IGL:       fprintf(errorfile, "== "); break;
+      case DIF:       fprintf(errorfile, "!= "); break;
+      case ATR:   fprintf(errorfile, "= ");  break;
+      case PEV:     fprintf(errorfile, "; ");  break;
+      case VIR:    fprintf(errorfile, ", ");  break;
+      case APR:   fprintf(errorfile, "( ");  break;
+      case FPR:   fprintf(errorfile, ") ");  break;
+      case ACL: fprintf(errorfile, "[ ");  break;
+      case FCL: fprintf(errorfile, "] ");  break;
+      case ACH:   fprintf(errorfile, "{ ");  break;
+      case FCH:   fprintf(errorfile, "} ");  break;
+      case ENDFILE:  fprintf(errorfile,"%s %s ",  "ENDFILE", "EOF"); break;
+      case NUM: fprintf(errorfile, "NUM, val = %s ",tokenString); break;
+      case ID: fprintf(errorfile, "ID, name = %s ",tokenString); break;
+      case ERR: fprintf(errorfile, "ERROR: %s ",tokenString); break;
+      default: /* should never happen */
+        fprintf(errorfile,"Unknown token: %d ",token);
+    }
+  }else{
+    switch (token)
+    { case ELSE:
+      case IF:
+      case INT:
+      case RETURN:
+      case VOID:
+      case WHILE:
+      fprintf(listing, "reserved word: %s\n",tokenString);
+      break;
+      case SOM:     fprintf(listing, "+\n");  break;
+      case SUB:    fprintf(listing, "-\n");  break;
+      case MUL:    fprintf(listing, "*\n");  break;
+      case DIV:     fprintf(listing, "/\n");  break;
+      case MEN:       fprintf(listing, "<\n");  break;
+      case IME:       fprintf(listing, "<=\n"); break;
+      case MAI:       fprintf(listing, ">\n");  break;
+      case IMA:       fprintf(listing, ">=\n"); break;
+      case IGL:       fprintf(listing, "==\n"); break;
+      case DIF:       fprintf(listing, "!=\n"); break;
+      case ATR:   fprintf(listing, "=\n");  break;
+      case PEV:     fprintf(listing, ";\n");  break;
+      case VIR:    fprintf(listing, ",\n");  break;
+      case APR:   fprintf(listing, "(\n");  break;
+      case FPR:   fprintf(listing, ")\n");  break;
+      case ACL: fprintf(listing, "[\n");  break;
+      case FCL: fprintf(listing, "]\n");  break;
+      case ACH:   fprintf(listing, "{\n");  break;
+      case FCH:   fprintf(listing, "}\n");  break;
+      case ENDFILE:  fprintf(listing,"%s %s\n",  "ENDFILE", "EOF"); break;
+      case NUM: fprintf(listing, "NUM, val = %s\n",tokenString); break;
+      case ID: fprintf(listing, "ID, name = %s\n",tokenString); break;
+      case ERR: fprintf(listing, "ERROR: %s\n",tokenString); break;
+      default: /* should never happen */
+        fprintf(listing,"Unknown token: %d\n",token);
+    }
   }
 }
 
@@ -207,7 +248,7 @@ void printTree( TreeNode * tree )
       switch (tree->kind.exp) {
         case OpK:
           fprintf(listing,"Op: ");
-          printToken(tree->attr.op, "\0");
+          printToken(0, tree->attr.op, "\0");
           break;
         case ConstK:
           fprintf(listing,"Const: %d\n",tree->attr.val);
@@ -224,7 +265,7 @@ void printTree( TreeNode * tree )
           break;
         case CalcK:
           fprintf(listing, "Operador : ");
-          printToken(tree->child[1]->attr.op, "\0");
+          printToken(0, tree->child[1]->attr.op, "\0");
           break;
         default:
           fprintf(listing,"Unknown ExpNode kind\n");

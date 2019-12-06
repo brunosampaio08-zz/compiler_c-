@@ -13,6 +13,8 @@
 
 #define SIZE 211
 
+static int hash ( char * key );
+
 typedef struct LineListRec
    { int lineno;
      struct LineListRec * next;
@@ -78,6 +80,5 @@ Scope currScope();
 Scope st_lookup_scope(char * scopeName);
 BucketList st_lookup_all_scope(char * name);
 void insertLines(char* name, int lineno);
-
 
 #endif

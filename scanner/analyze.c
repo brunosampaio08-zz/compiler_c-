@@ -11,6 +11,8 @@
 #include "util.h"
 #include "symboltable.h"
 
+FILE * errorfile;
+
 /*
  * To insert to symbol table build-in functions
  * int input()   // One integer value is input from the user.
@@ -113,7 +115,7 @@ static void popAfterInsertProc(TreeNode * t) {
 }
 
 static void symbolError(TreeNode * t, char * message) {
-  fprintf(listing,"ERRO SEMANTICO: Linha: %d: %s\n", t->lineno, message);
+  fprintf(errorfile,"ERRO SEMANTICO: Linha: %d: %s\n", t->lineno, message);
   Error = TRUE;
   //exit(-1);
 }
@@ -312,7 +314,7 @@ void buildSymtab(TreeNode * syntaxTree)
   popScope();
 
   if(st_lookup_scope("main") == NULL){
-    fprintf(listing, "\nERRO SEMANTICO: Main nao declarada!\n");
+    fprintf(errorfile, "ERRO SEMANTICO: Main nao declarada!\n");
   }
 
   if (TraceAnalyze) 
@@ -322,7 +324,7 @@ void buildSymtab(TreeNode * syntaxTree)
 }
 
 static void typeError(TreeNode * t, char * message)
-{ fprintf(listing,"Erro de tipo na linha %d: %s\n",t->lineno,message);
+{ fprintf(errorfile,"Erro de tipo na linha %d: %s\n",t->lineno,message);
   Error = TRUE;
   //exit(-1);
 }
@@ -347,11 +349,14 @@ static void checkNode(TreeNode * t)
           if (t->child[0]->attr.arr.type == Void) {
             typeError(t->child[0], "Atribuicao para uma variavel do tipo VOID");
           }
-          /*if(t->child[1]->child[1] != NULL){
-            if(t->child[1]->child[0]->type == Void){
-              typeError(t->child[1], "Atribuicao de uma funcao do tipo VOID");
+          if(t->child[1]->kind.exp == CallK){
+            if(st_lookup_scope(t->child[1]->attr.name) != NULL){
+              if(t->child[1]->type == Void){
+                typeError(t->child[1], "Atribuicao de VOID");
+              }
             }
-          }*/
+          }
+
           break;
         }
         case ReturnK: {

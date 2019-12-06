@@ -1,8 +1,10 @@
 
-Compilação C-: entrada.cm
+Compilação C-: sorterros.cm
 
 Arvore Sintatica:
     Declaracao de Vetor:  int vet[10];
+        Declaracao de variavel:  int y;
+        Declaracao de variavel:  int y;
         Declaracao de funcao:  int minloc()
             Parametro Vetor: a
               Parametro: int low
@@ -50,6 +52,7 @@ Arvore Sintatica:
                             Id: i
                             Op: +
                             Const: 1
+            Chamada de funcao: xyz
             Return
                 Id: k
     Declaracao de funcao:  void sort()
@@ -97,11 +100,15 @@ Arvore Sintatica:
                             Id: i
                             Op: +
                             Const: 1
-    Declaracao de funcao:  void main()
+    Declaracao de funcao:  void mainx()
             Parametro: void void
         Declaracao composta
             Declaracao de variavel:  int i;
+                    Declaracao de variavel:  int minloc;
                     Atribuicao
+                Id: w
+                Const: 0
+            Atribuicao
                 Id: i
                 Const: 0
             While
@@ -126,6 +133,12 @@ Arvore Sintatica:
                 Const: 10
             Atribuicao
                 Id: i
+                Chamada de funcao: sort
+                    Id: vet
+                    Const: 0
+                    Const: 10
+            Atribuicao
+                Id: i
                 Const: 0
             While
                 Operador : <
@@ -133,15 +146,7 @@ Arvore Sintatica:
                     Op: <
                     Const: 10
                 Declaracao composta
-                    Chamada de funcao: output
-                        ArrId 
-                            Id: i
-                    Atribuicao
-                        Id: i
-                        Operador : +
-                            Id: i
-                            Op: +
-                            Const: 1
+                    Const: 1
 
 Construindo a tabela de simbolos...
 
@@ -153,42 +158,43 @@ Escopo : global
 ---------------------------------------------------------------------------
 Nome       Tipo             Tipo de Dado     Número das linhas 
 ---------  ---------------  ------------  ----------------------
-main       Funcao         Void          34
-sort       Funcao         Void          21
+sort       Funcao         Void          23
 input      Funcao         Integer        0
 vet        Vetor          Vetor de Integers 4
-minloc     Funcao         Integer        6
+mainx      Funcao         Void          36
+minloc     Funcao         Integer        7
 output     Funcao         Void          0
+y          Variavel         Integer        5
 ---------------------------------------------------------------------------
 
 Escopo : minloc
 ---------------------------------------------------------------------------
 Nome       Tipo             Tipo de Dado     Número das linhas 
 ---------  ---------------  ------------  ----------------------
-low        Parametro        Integer        6, 8, 9, 10
-a          Parametro Vetor  Void          6, 9
-i          Variavel         Integer        7, 10, 11
-k          Variavel         Integer        7, 8, 18
-x          Variavel         Integer        7, 9
-high       Parametro        Integer        6, 11
+low        Parametro        Integer        7, 9, 10, 11
+a          Parametro Vetor  Void          7, 10
+i          Variavel         Integer        8, 11, 12
+k          Variavel         Integer        8, 9, 20
+x          Variavel         Integer        8, 10
+high       Parametro        Integer        7, 12
 ---------------------------------------------------------------------------
 
 Escopo : sort
 ---------------------------------------------------------------------------
 Nome       Tipo             Tipo de Dado     Número das linhas 
 ---------  ---------------  ------------  ----------------------
-low        Parametro        Integer        21, 23
-a          Parametro Vetor  Void          21
-i          Variavel         Integer        22, 23, 24
-k          Variavel         Integer        22
-high       Parametro        Integer        21, 24
+low        Parametro        Integer        23, 25
+a          Parametro Vetor  Void          23
+i          Variavel         Integer        24, 25, 26
+k          Variavel         Integer        24
+high       Parametro        Integer        23, 26
 ---------------------------------------------------------------------------
 
-Escopo : main
+Escopo : mainx
 ---------------------------------------------------------------------------
 Nome       Tipo             Tipo de Dado     Número das linhas 
 ---------  ---------------  ------------  ----------------------
-i          Variavel         Integer        36, 37, 38, 43, 44
+i          Variavel         Integer        38, 41, 42, 47, 48, 49
 ---------------------------------------------------------------------------
 
 

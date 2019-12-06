@@ -36,6 +36,7 @@ int lineno = 0;
 FILE * source;
 FILE * listing;
 FILE * code;
+FILE * errorfile;
 
 /* allocate and set tracing flags */
 int EchoSource = FALSE;
@@ -65,6 +66,12 @@ int main( int argc, char * argv[] )
   { fprintf(stderr,"File %s not found\n",pgm);
     exit(1);
   }
+  errorfile = fopen("errorfile.txt", "w");
+  if(errorfile == NULL){
+    fprintf(stderr, "Could not open file to print errors.\n");
+  }
+  fprintf(errorfile, "\\----------------------------------\\\n");
+  fprintf(errorfile, "ERROS SINTATICOS DO ARQUIVO %s:\n\n", pgm);
   listing = stdout; /* send listing to screen */
   fprintf(listing,"\nCompilação C-: %s\n",pgm);
 #if NO_PARSE
@@ -76,15 +83,18 @@ int main( int argc, char * argv[] )
     printTree(syntaxTree);
   }
 #if !NO_ANALYZE
-  if (! Error)
-  { if (TraceAnalyze) fprintf(listing,"\nConstruindo a tabela de simbolos...\n");
+  //if (! Error)
+  //{ 
+    fprintf(errorfile, "\n\\---------------------------------\\\n");
+    fprintf(errorfile, "ERROS SEMANTICOS DO ARQUIVO %s:\n\n", pgm);
+    if (TraceAnalyze) fprintf(listing,"\nConstruindo a tabela de simbolos...\n");
     buildSymtab(syntaxTree);
-    if(st_lookup_scope("main") != NULL){
+    //if(st_lookup_scope("main") != NULL){
       if (TraceAnalyze) fprintf(listing,"\nChecando tipos...\n");
       typeCheck(syntaxTree);
       if (TraceAnalyze) fprintf(listing,"\nChecagem de tipos concluida\n");
-    }
-  }
+    //}
+  //}
 #if !NO_CODE
   if (! Error)
   { char * codefile;

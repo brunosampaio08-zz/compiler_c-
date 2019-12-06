@@ -23,7 +23,7 @@ LETRA [a-zA-Z]
 
 %%
 
-"/*"    {   
+"/*"    {
         char c;
         char d;
         c = input();
@@ -33,7 +33,7 @@ LETRA [a-zA-Z]
             {
                 d=c;
                 c = input();
-                if(c==EOF) break;
+                if(c==EOF) return ERR;
                 if(c=='\n') lineno++;
             }while(!(d == '*' && c == '/'));
         }
@@ -87,7 +87,7 @@ TokenType getToken(void)
   if (TraceScan) 
   {
     fprintf(listing,"\t%d: ",lineno);
-    printToken(currentToken,tokenString);
+    printToken(0, currentToken,tokenString);
   }
   return currentToken;
 }

@@ -11,7 +11,7 @@
 /* Procedure printToken prints a token 
  * and its lexeme to the listing file
  */
-void printToken( TokenType, const char* );
+void printToken(int arq, TokenType, const char* );
 
 void printTypes(TreeNode* tree);
 /* Function newStmtNode creates a new statement
