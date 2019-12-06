@@ -41,7 +41,7 @@ void mainx(void)
 	i = 0;
 	while (i < 10){
 		vet[i] = input();
-		i = i + 1;
+		i = i  1;
 	}
 	sort(vet,0,10);
         i = sort(vet,0,10);

@@ -155,7 +155,7 @@ static void insertNode( TreeNode * t)
         case IdK:
         case ArrIdK:
         case CallK: {
-          // check undeclation
+          // check undeclation / função não declarada
           if (st_lookup_all_scope(t->attr.name) == NULL){
             symbolError(t, "Simbolo nao definido");
           } else {
@@ -176,12 +176,12 @@ static void insertNode( TreeNode * t)
         case FunK: {
           // initialize location counter
           locationCounter = 0;
-          /* Look up scope list to check scope existence */
+          /* Look up scope list to check scope existence / função já declarada*/
           if (st_lookup_scope(t->attr.name) != NULL) {
             symbolError(t, "Redefinicao de funcao");
             break;
           }
-
+          //verifica se o escopo atual é o global e cria um novo escopo
           if (strcmp(currScope()->name, "global") == 0) {
             st_insert(currScope()->name, t->attr.name, t->child[0]->type, t, locationCounter++);
           }
@@ -195,18 +195,18 @@ static void insertNode( TreeNode * t)
 
         //Variable case
         case VarK: {
-          /* Look up to check variable existence */
+          /* Look up to check variable existence / variavel já declarada*/
           if (st_lookup(t->attr.name) != NULL) {
             symbolError(t, "Redefinicao de variavel");
             break;
           }
-
+          // função com nome já existe
           if(st_lookup_scope(t->attr.name) != NULL){
             symbolError(t, "Declaracao Invalida");
             break;
           }
 
-          // Type Checking : Type should not be void
+          // Type Checking : Type should not be void / variável como void
           if (t->child[0]->type == Void) {
             symbolError(t, "Variavel nao deveria ser do tipo VOID");
             break;
@@ -219,17 +219,17 @@ static void insertNode( TreeNode * t)
         //Array case
         case ArrVarK: {
 
-          // Type Checking : Type should not be void
+          // Type Checking : Type should not be void / vetor como void
           if (t->child[0]->type == Void) {
             symbolError(t, "Tipo invalido");
             break;
           }
-
+          // função já declarada
           if(st_lookup_scope(t->attr.arr.name) != NULL){
             symbolError(t, "Declaracao invalida");
             break;
           }
-
+          //vetor ja declarado
           /*  Look up to check array variable existence  */
           if (st_lookup(t->attr.arr.name) != NULL) {
             symbolError(t, "Vetor ja foi declarado");
@@ -242,18 +242,18 @@ static void insertNode( TreeNode * t)
         //ArrayParamenter case
         case ArrParamK: {
 
-          // Type Checking : Type should not be void
+          // Type Checking : Type should not be void / argumento não pode ser void
           if (t->child[0]->type == Void) {
             symbolError(t, "Tipo invalido");
             break;
           }
-
+          // função com esse nome ja existe
           if(st_lookup_scope(t->attr.name) != NULL){
             symbolError(t, "Declaracao invalida");
             break;
           }
 
-          /*  Look up to check array parameter existence  */
+          /*  Look up to check array parameter existence / parametro ja existente */
           if (st_lookup(t->attr.name) != NULL) {
             symbolError(t, "Redefinicao de um parametro vetor");
             break;

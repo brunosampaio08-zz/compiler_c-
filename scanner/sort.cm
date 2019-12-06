@@ -18,7 +18,7 @@ int minloc ( int a[], int low, int high )
 	return k;
 }
 
-void sort( void k, int a[], int low, int high)
+void sort(int a[], int low, int high)
 {	int i; int k;
 	i = low;
     a = 10;
