@@ -1,7 +1,0 @@
-\----------------------------------\
-ERROS SINTATICOS DO ARQUIVO sort.cm:
-
-
-\---------------------------------\
-ERROS SEMANTICOS DO ARQUIVO sort.cm:
-

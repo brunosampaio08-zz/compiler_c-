@@ -72,7 +72,7 @@ int main( int argc, char * argv[] )
   }
   fprintf(errorfile, "\\----------------------------------\\\n");
   fprintf(errorfile, "ERROS SINTATICOS DO ARQUIVO %s:\n\n", pgm);
-  listing = stdout; /* send listing to screen */
+  listing = fopen("output.txt", "w"); //Print syntax tree and symbol table to file output.txt
   fprintf(listing,"\nCompilação C-: %s\n",pgm);
 #if NO_PARSE
   while (getToken()!=ENDFILE);

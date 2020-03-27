@@ -1,5 +1,5 @@
 
-Compilação C-: sorterros.cm
+Compilação C-: sort.cm
 
 Arvore Sintatica:
     Declaracao de Vetor:  int vet[10];
