@@ -22,6 +22,7 @@ Outputs on folder: compilador_c-/output \
 Inputs on folder: compilador_c-/input
 
 Sinthesys will only run if there are no syntax or semantic errors on input file.
-- This can be changed in main. \
+- This can be changed in main.
+
 After compiling 'make clean' will clean all unnecessary files.
 - After make clean it's necessary to make again in order to run ./compiler.
