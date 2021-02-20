@@ -1,0 +1,89 @@
+
+Compilação C-: input/programa1.cm
+
+Arvore Sintatica:
+    Declaracao de funcao:  void main()
+            Parametro: void void
+        Declaracao composta
+            Declaracao de variavel:  int a;
+                    Declaracao de variavel:  int b;
+                    Atribuicao
+                Id: a
+                Chamada de funcao: input
+            Atribuicao
+                Id: b
+                Chamada de funcao: input
+            If
+                Operador : ==
+                    Id: a
+                    Op: ==
+                    Id: b
+                Declaracao composta
+                    Chamada de funcao: output
+                        Const: 1
+            If
+                Operador : !=
+                    Id: a
+                    Op: !=
+                    Id: b
+                Declaracao composta
+                    Chamada de funcao: output
+                        Const: 2
+            If
+                Operador : >
+                    Id: a
+                    Op: >
+                    Id: b
+                Declaracao composta
+                    Chamada de funcao: output
+                        Const: 3
+            If
+                Operador : <
+                    Id: a
+                    Op: <
+                    Id: b
+                Declaracao composta
+                    Chamada de funcao: output
+                        Const: 4
+            If
+                Operador : >=
+                    Id: a
+                    Op: >=
+                    Id: b
+                Declaracao composta
+                    Chamada de funcao: output
+                        Const: 5
+            If
+                Operador : <=
+                    Id: a
+                    Op: <=
+                    Id: b
+                Declaracao composta
+                    Chamada de funcao: output
+                        Const: 6
+
+Construindo a tabela de simbolos...
+
+---------------------
+|  Tabela de simbolos  |
+---------------------
+
+Escopo : global
+---------------------------------------------------------------------------
+Nome       Tipo             Tipo de Dado     loc    Número das linhas 
+---------  ---------------  ------------     ---    ------------------
+main       Funcao           Void              0     1
+input      Funcao           Integer           0     0
+output     Funcao           Void              0     0
+---------------------Decl Num == 0 ---------------------------
+---------------------------------------------------------------------------
+
+Escopo : main
+---------------------------------------------------------------------------
+Nome       Tipo             Tipo de Dado     loc    Número das linhas 
+---------  ---------------  ------------     ---    ------------------
+a          Variavel         Integer           1     2, 4, 6, 9, 12, 15, 18, 21
+b          Variavel         Integer           2     3, 5, 6, 9, 12, 15, 18, 21
+---------------------Decl Num == 2 ---------------------------
+---------------------------------------------------------------------------
+

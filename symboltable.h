@@ -29,25 +29,6 @@ typedef struct BucketListRec {
   ExpType type;
 } * BucketList;
 
-/* Procedure st_insert inserts line numbers and
- * memory locations into the symbol table
- * loc = memory location is inserted only the
- * first time, otherwise ignored
- */
-void st_insert(char * scopeName, char * name, ExpType type, TreeNode * streeNode, int loc);
-
-/* Function st_lookup returns the memory 
- * location of a variable or -1 if not found
- */
-BucketList st_lookup(char * name);
-
-/* Procedure printSymTab prints a formatted 
- * listing of the symbol table contents 
- * to the listing file
- */
-
-  void printSymTab(FILE * listing);
-
 /*
  *Scope definitions
 */
@@ -59,6 +40,8 @@ typedef struct ScopeListRec
   int nestedLevel;
   struct ScopeListRec *parent;
   BucketList hashTable[SIZE]; /* the hash table */
+  ExpType type;
+  int scopeCount;
 } * Scope;
 
 // global scope to cover function definitions
@@ -72,7 +55,7 @@ static int sizeOfList = 0;
 static Scope scopeStack[SIZE];
 static int topScope = 0;
 
-Scope newScope(char * scopeName);
+Scope newScope(char * scopeName, ExpType type);
 void popScope(void);
 void pushScope(Scope scope);
 void insertScopeToList(Scope scope);
@@ -80,5 +63,24 @@ Scope currScope();
 Scope st_lookup_scope(char * scopeName);
 BucketList st_lookup_all_scope(char * name);
 void insertLines(char* name, int lineno);
+int st_lookup_mempos(char *varName, char *scopeName);
+BucketList st_lookup(char * name);
+void st_changeFuncLine(char *scopeName, int newLine, int isEnd);
+int st_returnFuncLine(char *scopeName, int isEnd);
+int st_isGlobal(char* varName, char* scopeName);
+
+/* Procedure st_insert inserts line numbers and
+ * memory locations into the symbol table
+ * loc = memory location is inserted only the
+ * first time, otherwise ignored
+ */
+void st_insert(char * scopeName, char * name, ExpType type, TreeNode * streeNode, int loc);
+
+/* Procedure printSymTab prints a formatted 
+ * listing of the symbol table contents 
+ * to the listing file
+ */
+
+  void printSymTab(FILE * listing);
 
 #endif

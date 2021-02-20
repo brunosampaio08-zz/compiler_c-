@@ -10,6 +10,7 @@
 #include "util.h"
 
 FILE * errorfile;
+FILE * icodefile;
 
 /* Procedure printToken prints a token 
  * and its lexeme to the listing file
@@ -52,7 +53,7 @@ void printToken(int arq, TokenType token, const char* tokenString )
       default: /* should never happen */
         fprintf(errorfile,"Unknown token: %d ",token);
     }
-  }else{
+  }else if(arq == 0){
     switch (token)
     { case ELSE:
       case IF:
@@ -87,6 +88,31 @@ void printToken(int arq, TokenType token, const char* tokenString )
       case ERR: fprintf(listing, "ERROR: %s\n",tokenString); break;
       default: /* should never happen */
         fprintf(listing,"Unknown token: %d\n",token);
+    }
+  }else{
+    switch (token)
+    {
+      case SOM:     fprintf(icodefile, "+");  break;
+      case SUB:    fprintf(icodefile, "-");  break;
+      case MUL:    fprintf(icodefile, "*");  break;
+      case DIV:     fprintf(icodefile, "/");  break;
+      case MEN:       fprintf(icodefile, "<");  break;
+      case IME:       fprintf(icodefile, "<="); break;
+      case MAI:       fprintf(icodefile, ">");  break;
+      case IMA:       fprintf(icodefile, ">="); break;
+      case IGL:       fprintf(icodefile, "=="); break;
+      case DIF:       fprintf(icodefile, "!="); break;
+      case ATR:   fprintf(icodefile, "=");  break;
+      case PEV:     fprintf(icodefile, ";");  break;
+      case VIR:    fprintf(icodefile, ",");  break;
+      case APR:   fprintf(icodefile, "(");  break;
+      case FPR:   fprintf(icodefile, ")");  break;
+      case ACL: fprintf(icodefile, "[");  break;
+      case FCL: fprintf(icodefile, "]");  break;
+      case ACH:   fprintf(icodefile, "{");  break;
+      case FCH:   fprintf(icodefile, "}");  break;
+      default: /* should never happen */
+        break;
     }
   }
 }
@@ -124,6 +150,7 @@ TreeNode * newExpNode(ExpKind kind)
     t->kind.exp = kind;
     t->lineno = lineno;
     t->type = Void;
+    //t->temporary = 0;
   }
   return t;
 }

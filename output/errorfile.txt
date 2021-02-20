@@ -1,0 +1,7 @@
+\----------------------------------\
+ERROS SINTATICOS DO ARQUIVO input/programa1.cm:
+
+
+\---------------------------------\
+ERROS SEMANTICOS DO ARQUIVO input/programa1.cm:
+

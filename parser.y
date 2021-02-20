@@ -5,7 +5,6 @@
     #include "util.h"
     #include "scan.h"
     #include "parse.h"
-
     #define YYSTYPE TreeNode *
     static char * savedName; //names for use
     static int savedLineNo; //line number for use
@@ -103,7 +102,7 @@ param-lista: param-lista VIR param{
                     t->sibling = $3;
                     $$ = $1;
                 } else {
-                    $$ = $2;
+                    $$ = $3;
                 }
             } | param{
                 $$ = $1;
@@ -143,7 +142,9 @@ local-declaracoes: local-declaracoes var-declaracao{
 statement-lista: statement-lista statement{
                     YYSTYPE t = $1;
                     if (t != NULL) {
-                        while (t->sibling != NULL) { t = t->sibling; }
+                        while (t->sibling != NULL) { 
+                            t = t->sibling; 
+                        }
                     t->sibling = $2;
                     $$ = $1;
                     } else {
@@ -196,7 +197,7 @@ retorno-decl: RETURN PEV{
                 $$->child[0] = $2;
             };
 
-expressao: var ATR expressao{
+expressao: var ATR expressao{   
                 $$ = newStmtNode(AssignK);
                 $$->child[0] = $1;
                 $$->child[1] = $3;
@@ -204,7 +205,7 @@ expressao: var ATR expressao{
                 $$ = $1;
             };
 
-var: id{
+var: id {
         $$ = newExpNode(IdK);
         $$->attr.name = savedName;
     } | id{
@@ -307,7 +308,9 @@ args: arg-lista{
 arg-lista: arg-lista VIR expressao{
                 YYSTYPE t = $1;
                 if (t != NULL) {
-                while (t->sibling != NULL) { t = t->sibling; }
+                while (t->sibling != NULL) { 
+                    t = t->sibling; 
+                }
                 t->sibling = $3;
                 $$ = $1;
                 } else {

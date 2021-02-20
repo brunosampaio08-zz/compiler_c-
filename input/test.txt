@@ -1,0 +1,12 @@
+int a;
+
+int gcd(int vet[]){
+	vet[3] = a;
+}
+
+void main(void){
+	int a; int vet[5];
+	a = 3;
+	gcd(vet);
+	vet[gcd(vet)] = 10;
+}

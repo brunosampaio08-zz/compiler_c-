@@ -54,8 +54,9 @@ typedef int TokenType;
 
 extern FILE* source; /* source code text file */
 extern FILE* listing; /* listing output text file */
-extern FILE* code; /* code text file for TM simulator */
+extern FILE* icodefile; /* code text file for TM simulator */
 extern FILE* errorfile;
+extern FILE* assemblycode;
 
 extern int lineno; /* source line number for listing */
 
@@ -67,11 +68,12 @@ typedef enum { StmtK, ExpK, DeclK } NodeKind;
 typedef enum { IfK, WhileK, AssignK, CompoundK, ReturnK } StmtKind;
 typedef enum { OpK, ConstK, IdK, TypeK, ArrIdK, CallK, CalcK } ExpKind;
 typedef enum { VarK, FunK, ArrVarK, ArrParamK, ParamK } DeclKind;
-
+  
 /* ExpType is used for type checking */
 typedef enum {Void,Integer,IntegerArray} ExpType;
 
 #define MAXCHILDREN 3
+#define MAX_TEMP 10
 
 struct ScopeListRec;
 
@@ -91,9 +93,9 @@ typedef struct treeNode
              TokenType type;
              int val;
              char * name; 
-             ArrAttr arr;
-             struct ScopeListRec * scope;} attr;
+             ArrAttr arr;} attr;
      ExpType type; /* for type checking of exps */
+     int temporary;
    } TreeNode;
 
 /**************************************************/

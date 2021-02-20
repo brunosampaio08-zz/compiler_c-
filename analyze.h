@@ -8,6 +8,11 @@
 #ifndef _ANALYZE_H_
 #define _ANALYZE_H_
 
+
+// this is needed to check parameters
+static int isFirstCompoundK = 0;
+static int locationCounter = 1;
+
 /* Function buildSymtab constructs the symbol 
  * table by preorder traversal of the syntax tree
  */

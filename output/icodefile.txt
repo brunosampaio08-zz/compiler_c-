@@ -1,0 +1,56 @@
+
+\----------------------------------\
+CODIGO INTERMEDIARO DO ARQUIVO input/programa1.cm:
+
+(CALL, main, _, _)
+
+(FUN_DECL, void, _, main)
+    (ALLOC, int, _ ,a)
+    (ALLOC, int, _ ,b)
+    (CALL, input, _, _)
+    (R_PARAM, _, _, a)
+    (CALL, input, _, _)
+    (R_PARAM, _, _, b)
+    (==, a, b, _t0)
+    (IF_FALSE, _t0, _L0, _)
+
+        (PARAM, 1, _, _)
+        (CALL, output, _, _)
+    (LABEL, _L0, _, _)
+
+    (!=, a, b, _t0)
+    (IF_FALSE, _t0, _L1, _)
+
+        (PARAM, 2, _, _)
+        (CALL, output, _, _)
+    (LABEL, _L1, _, _)
+
+    (>, a, b, _t0)
+    (IF_FALSE, _t0, _L2, _)
+
+        (PARAM, 3, _, _)
+        (CALL, output, _, _)
+    (LABEL, _L2, _, _)
+
+    (<, a, b, _t0)
+    (IF_FALSE, _t0, _L3, _)
+
+        (PARAM, 4, _, _)
+        (CALL, output, _, _)
+    (LABEL, _L3, _, _)
+
+    (>=, a, b, _t0)
+    (IF_FALSE, _t0, _L4, _)
+
+        (PARAM, 5, _, _)
+        (CALL, output, _, _)
+    (LABEL, _L4, _, _)
+
+    (<=, a, b, _t0)
+    (IF_FALSE, _t0, _L5, _)
+
+        (PARAM, 6, _, _)
+        (CALL, output, _, _)
+    (LABEL, _L5, _, _)
+
+(FUN_END, _, _, _)

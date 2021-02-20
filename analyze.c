@@ -37,13 +37,19 @@ static void insertInputFunc(void) {
   fun_declaration->child[2] = compound_stmt;
 
   /* Insert input function*/
-  st_insert("global", "input", Integer, fun_declaration, 1);
+  st_insert("global", "input", Integer, fun_declaration, 0);
 }
 
 /* To insert to symbol table build-in functions
  * int input()   // One integer value is input from the user.
  * void output() // Prints the value of arg.
  */
+
+static void typeError(TreeNode * t, char * message)
+{ fprintf(errorfile,"Erro de tipo na linha %d: %s\n",t->lineno,message);
+  Error = TRUE;
+  //exit(-1);
+}
 
 static void insertOutputFunc(void) {
 
@@ -120,14 +126,11 @@ static void symbolError(TreeNode * t, char * message) {
   //exit(-1);
 }
 
-// this is needed to check parameters
-static int isFirstCompoundK = 0;
-static int locationCounter = 0;
-
 /* Procedure insertNode inserts 
  * identifiers stored in t into 
  * the symbol table 
  */
+
 
 static void insertNode( TreeNode * t)
 { switch (t->nodekind)
@@ -137,16 +140,50 @@ static void insertNode( TreeNode * t)
       switch (t->kind.stmt) {
         case CompoundK: {
           if (!isFirstCompoundK) {
-            Scope scope = newScope(currScope()->name);
+            Scope scope = newScope(currScope()->name, currScope()->type);
             scope->parent = currScope();
             pushScope(scope);
           }
           isFirstCompoundK = 0;
           break;
         }
+        case ReturnK:
+          if(t->child[0] == NULL){
+              if(currScope()->type != Void){
+                typeError(t, "Retorno esperado!");
+              }
+            }else{
+              if(currScope()->type == Void){
+                typeError(t, "Retorno vazio esperado!");
+              }
+            }
+          break;
+        case AssignK: {
+          // Verify the type match of two operands when assigning.
+          if (t->child[0]->type == IntegerArray) {
+            if(t->child[0]->child[0] == NULL){
+              typeError(t->child[0], "Atribuicao para uma variavel do tipo vetor");
+            }
+          }
+          if (t->child[0]->attr.arr.type == Void) {
+            typeError(t->child[0], "Atribuicao para uma variavel do tipo VOID");
+          }
+          if(t->child[1]->kind.exp == CallK){
+            if(st_lookup_scope(t->child[1]->attr.name) != NULL){
+              if(st_lookup_scope(t->child[1]->attr.name)->type == Void){
+                typeError(t->child[1], "Atribuicao de VOID");
+              }
+            }
+          }
+
+          break;
+        }
+        
         default:
           break;
+        
       }
+      
       break;
     }
     //Expression case
@@ -163,6 +200,7 @@ static void insertNode( TreeNode * t)
             t->type = list->type;
             insertLines(t->attr.name, t->lineno);
           }
+          break;
         }
         default:
           break;
@@ -186,7 +224,7 @@ static void insertNode( TreeNode * t)
             st_insert(currScope()->name, t->attr.name, t->child[0]->type, t, locationCounter++);
           }
 
-          Scope scope = newScope(t->attr.name);
+          Scope scope = newScope(t->attr.name, t->child[0]->type);
           scope->parent = currScope();
           pushScope(scope);
           isFirstCompoundK = 1;
@@ -212,7 +250,7 @@ static void insertNode( TreeNode * t)
             break;
           }
 
-          st_insert(currScope()->name, t->attr.name, t->child[0]->type, t, locationCounter++);
+          st_insert(currScope()->name, t->attr.name, t->child[0]->type, t, (currScope()->scopeCount++)+1);
           break;
         }
 
@@ -235,7 +273,7 @@ static void insertNode( TreeNode * t)
             symbolError(t, "Vetor ja foi declarado");
             break;
           }
-          st_insert(currScope()->name, t->attr.arr.name, t->type, t, locationCounter++);
+          st_insert(currScope()->name, t->attr.arr.name, t->type, t, (currScope()->scopeCount++)+1);
           break;
         }
 
@@ -259,7 +297,7 @@ static void insertNode( TreeNode * t)
             break;
           }
 
-          st_insert(currScope()->name, t->attr.name, t->type, t, locationCounter++);
+          st_insert(currScope()->name, t->attr.name, t->type, t, (currScope()->scopeCount++)+1);
           break;
         }
 
@@ -283,7 +321,7 @@ static void insertNode( TreeNode * t)
               break;
             }
 
-            st_insert(currScope()->name, t->attr.name, t->child[0]->type, t, locationCounter++);
+            st_insert(currScope()->name, t->attr.name, t->child[0]->type, t, (currScope()->scopeCount++)+1);
           }
           break;
         }
@@ -303,7 +341,7 @@ static void insertNode( TreeNode * t)
  */
 void buildSymtab(TreeNode * syntaxTree)
 { 
-  globalScope = newScope("global");
+  globalScope = newScope("global", Void);
   // push global scope
   pushScope(globalScope);
 
@@ -321,67 +359,4 @@ void buildSymtab(TreeNode * syntaxTree)
   {
     printSymTab(listing);
   }
-}
-
-static void typeError(TreeNode * t, char * message)
-{ fprintf(errorfile,"Erro de tipo na linha %d: %s\n",t->lineno,message);
-  Error = TRUE;
-  //exit(-1);
-}
-
-/* Procedure checkNode performs
- * type checking at a single tree node
- */
-static void checkNode(TreeNode * t)
-{ 
-  switch (t->nodekind)
-  {
-    case StmtK:
-      switch (t->kind.stmt)
-      { 
-        case AssignK: {
-          // Verify the type match of two operands when assigning.
-          if (t->child[0]->type == IntegerArray) {
-            if(t->child[0]->child[0] == NULL){
-              typeError(t->child[0], "Atribuicao para uma variavel do tipo vetor");
-            }
-          }
-          if (t->child[0]->attr.arr.type == Void) {
-            typeError(t->child[0], "Atribuicao para uma variavel do tipo VOID");
-          }
-          if(t->child[1]->kind.exp == CallK){
-            if(st_lookup_scope(t->child[1]->attr.name) != NULL){
-              if(t->child[1]->type == Void){
-                typeError(t->child[1], "Atribuicao de VOID");
-              }
-            }
-          }
-
-          break;
-        }
-        case ReturnK: {
-          const TreeNode * funcDecl;
-          const ExpType funcType = funcDecl->type;
-          const TreeNode * expr = t->child[0];
-
-          if (funcType == Void && (expr != NULL && expr->type != Void)) {
-              typeError(t,"Retorno vazio era esperado");
-            } else if (funcType == Integer && (expr == NULL || expr->type == Void)) {
-              typeError(t,"Retorno esperado");
-            }
-        }
-        default:
-          break;
-        }
-        break;
-      default:
-        break;
-      }
-}
-
-/* Procedure typeCheck performs type checking 
- * by a postorder syntax tree traversal
- */
-void typeCheck(TreeNode * syntaxTree)
-{ traverse(syntaxTree,nullProc,checkNode);
 }
