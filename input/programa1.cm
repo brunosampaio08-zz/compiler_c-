@@ -1,24 +1,10 @@
-void main(void){
-    int a;
-    int b;
-    a = input();
-    b = input();
-    if(a == b){
-        output(1);
-    }
-    if(a != b){
-        output(2);
-    }
-    if(a > b){
-        output(3);
-    }
-    if(a < b){
-        output(4);
-    }
-    if(a >= b){
-        output(5);
-    }
-    if(a <= b){
-        output(6);
-    }
+void main(void)
+{
+	int a;
+	int b;
+	int c;
+	a = 7;
+	b = 4;
+	c = a+b;
+	output(c+a);
 }

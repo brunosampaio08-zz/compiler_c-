@@ -1,4 +1,5 @@
-/*Um programa para calcular o mdc segundo o algoritmo de Euclides*/
+/*Um programa para calcular o mdc segundo o algoritmo de Euclides
+	KKKKK*/
 
 int gcd(int u, int v){
 	output(u);

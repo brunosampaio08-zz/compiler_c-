@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "globals.h": "c",
+        "symboltable.h": "c",
+        "string": "c"
+    }
+}

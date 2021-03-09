@@ -19,6 +19,136 @@ FILE * errorfile;
  * void output() // Prints the value of arg.
  */
 
+
+/*void changeContext(int currProc) -> unstack all registers (after set baserReg) -> unstack PC last*/
+static void insertChangeContextFunc(void){
+  
+  TreeNode * fun_declaration = newDeclNode(FunK);
+  fun_declaration->type = Void;
+
+  TreeNode * type_specifier = newDeclNode(FunK);
+  type_specifier->attr.type = VOID;
+
+  TreeNode * params = newDeclNode(ParamK);
+  params->attr.name = "currProc";
+  params->child[0] = newExpNode(TypeK);
+  params->child[0]->attr.type = INT;
+
+  TreeNode * compound_stmt = newStmtNode(CompoundK);
+  compound_stmt->child[0] = NULL;
+  compound_stmt->child[1] = NULL;
+
+  fun_declaration->lineno = 0;
+  fun_declaration->attr.name = "changeContext";
+  fun_declaration->child[0] = type_specifier;
+  fun_declaration->child[1] = params;
+  fun_declaration->child[2] = compound_stmt;
+
+  /* Insert output function*/
+  st_insert("global", "changeContext", Void, fun_declaration, 0);
+
+}
+
+/*void changeContext(int currProc) -> unstack all registers (after set baserReg) -> unstack PC last*/
+static void insertSetPCFunc(void){
+  
+  TreeNode * fun_declaration = newDeclNode(FunK);
+  fun_declaration->type = Void;
+
+  TreeNode * type_specifier = newDeclNode(FunK);
+  type_specifier->attr.type = VOID;
+
+  TreeNode * params = newDeclNode(ParamK);
+  params->attr.name = "currProc";
+  params->child[0] = newExpNode(TypeK);
+  params->child[0]->attr.type = INT;
+
+  TreeNode * compound_stmt = newStmtNode(CompoundK);
+  compound_stmt->child[0] = NULL;
+  compound_stmt->child[1] = NULL;
+
+  fun_declaration->lineno = 0;
+  fun_declaration->attr.name = "setPC";
+  fun_declaration->child[0] = type_specifier;
+  fun_declaration->child[1] = params;
+  fun_declaration->child[2] = compound_stmt;
+
+  /* Insert output function*/
+  st_insert("global", "setPC", Void, fun_declaration, 0);
+
+}
+
+/*void stackRegister(void) -> creates a stack and stacks all registers*/
+static void insertStackRegisterFunc(){
+  TreeNode * fun_declaration = newDeclNode(FunK);
+  fun_declaration->type = Void;
+
+  TreeNode * type_specifier = newExpNode(TypeK);
+  type_specifier->attr.type = VOID;
+
+  TreeNode * compound_stmt = newStmtNode(CompoundK);
+  compound_stmt->child[0] = NULL;
+  compound_stmt->child[1] = NULL;
+
+  fun_declaration->lineno = 0;
+  fun_declaration->attr.name = "stackRegisters";
+  fun_declaration->child[0] = type_specifier;
+  fun_declaration->child[1] = NULL;
+  fun_declaration->child[2] = compound_stmt;
+
+  /* Insert input function*/
+  st_insert("global", "stackRegisters", Void, fun_declaration, 0);
+}
+
+/*void storeRegisters(int currProc) -> stores regs to registers array */  
+static void insertStoreRegisterFunc(){
+  TreeNode * fun_declaration = newDeclNode(FunK);
+  fun_declaration->type = Void;
+
+  TreeNode * type_specifier = newDeclNode(FunK);
+  type_specifier->attr.type = VOID;
+
+  TreeNode * params = newDeclNode(ParamK);
+  params->attr.name = "currProc";
+  params->child[0] = newExpNode(TypeK);
+  params->child[0]->attr.type = INT;
+
+  TreeNode * compound_stmt = newStmtNode(CompoundK);
+  compound_stmt->child[0] = NULL;
+  compound_stmt->child[1] = NULL;
+
+  fun_declaration->lineno = 0;
+  fun_declaration->attr.name = "storeRegisters";
+  fun_declaration->child[0] = type_specifier;
+  fun_declaration->child[1] = params;
+  fun_declaration->child[2] = compound_stmt;
+
+  /* Insert output function*/
+  st_insert("global", "storeRegisters", Void, fun_declaration, 0);
+}
+
+/*int processFinished(void) -> returns 1 if process sent finish signal, 0 otherwise  */
+static void insertProcessFinishedFunc(){
+  TreeNode * fun_declaration = newDeclNode(FunK);
+  fun_declaration->type = Integer;
+
+  TreeNode * type_specifier = newExpNode(TypeK);
+  type_specifier->attr.type = INT;
+
+  TreeNode * compound_stmt = newStmtNode(CompoundK);
+  compound_stmt->child[0] = NULL;
+  compound_stmt->child[1] = NULL;
+
+  fun_declaration->lineno = 0;
+  fun_declaration->attr.name = "processFinished";
+  fun_declaration->child[0] = type_specifier;
+  fun_declaration->child[1] = NULL;
+  fun_declaration->child[2] = compound_stmt;
+
+  /* Insert input function*/
+  st_insert("global", "processFinished", Integer, fun_declaration, 0);
+}
+
 static void insertInputFunc(void) {
   TreeNode * fun_declaration = newDeclNode(FunK);
   fun_declaration->type = Integer;
@@ -345,8 +475,14 @@ void buildSymtab(TreeNode * syntaxTree)
   // push global scope
   pushScope(globalScope);
 
+  //Inser system calls
   insertInputFunc();
   insertOutputFunc();
+  insertChangeContextFunc();
+  insertStackRegisterFunc();
+  insertStoreRegisterFunc();
+  insertProcessFinishedFunc();
+  insertSetPCFunc();
 
   traverse(syntaxTree, insertNode, popAfterInsertProc);
   popScope();

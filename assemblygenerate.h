@@ -10,8 +10,9 @@ typedef enum {ADC, ADCI, AND, ANDI, ASL, CMP, CPI, CPX, CPY,
                 MULP, MULPI, DIVS, DIVSI, LDA, LDAI, LDX, LDXI,
                 LDY, LDYI, STA, STX, STY, PHA, PHP, PLA, PLP,
                 TSX, TXS, BEQ, BMI, BNE, BPL, JMP, JSR, RTS, 
-                CLZ, CLN, CLV, DEX, DEY, INX, INY, TAX, TAY,
-                TXA, TYA, BRK, NOP, INPT, OUP} instructionType;
+                CLZ, CLN, CLV, DEX, DEY, INX, INY, TAX, TAY, TXA, TYA, 
+                BRK, NOP, INPT, OUP, TABR, CPF, PHPC, PLPC, SFF,
+                TXAX, TAXX, SPC} instructionType;
 
 typedef struct assemblyListT *assemblyListS;
 

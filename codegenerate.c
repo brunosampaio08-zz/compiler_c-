@@ -468,7 +468,7 @@ void printLine(QuadrupleList QList, TreeNode *tree){
 
 void printCode(QuadrupleList QList,  TreeNode * tree )
 { 
-    int i, localLabel = 0;
+    int i, localLabel = 0, auxLabel = 0;
 
     switch(tree->nodekind){
         case DeclK:
@@ -566,13 +566,15 @@ void printCode(QuadrupleList QList,  TreeNode * tree )
                     //Printa o corpo do if, se existir
 
                     localLabel = labelCount;
-                    labelCount++;
+                    //labelCount++;
                     if(tree->child[1] != NULL){
                         printCode(QList, tree->child[1]);
                     }
                     indentNO-=1;
-                    
+
+                    auxLabel = labelCount;
                     labelCount = localLabel;
+                    
                     if(tree->child[2] != NULL){
                         indent();
                         fprintf(icodefile, "(GOTO, _, _L%d, _)\n", labelCount);
@@ -595,6 +597,7 @@ void printCode(QuadrupleList QList,  TreeNode * tree )
                         insertNQuad(QList, LABEL, NONE, NONE, NONE, NULL);
                         labelCount++;
                     }
+                    labelCount = auxLabel;
                 break;
 
                 //Achou uma iteracao declaracao
@@ -619,6 +622,7 @@ void printCode(QuadrupleList QList,  TreeNode * tree )
                     if(tree->child[1] != NULL){
                         printCode(QList, tree->child[1]);
                     }
+                    auxLabel = labelCount;
                     labelCount = localLabel;
                     indentNO-=1;
                     //Fim do while(volta para a checagem)
@@ -631,6 +635,7 @@ void printCode(QuadrupleList QList,  TreeNode * tree )
                     indent();
                     fprintf(icodefile, "(LABEL, _L%d, _, _)\n\n", labelCount);
                     insertNQuad(QList, LABEL, NONE, NONE, NONE, NULL);
+                    labelCount = auxLabel;
 
                 break;
 

@@ -4,8 +4,8 @@
 #include "symboltable.h"
 #include "assemblygenerate.h"
 
-//Code goes from pos 0 to pos 5000
-#define codeStart 0
+//Code goes from pos 1 to pos 5000
+#define codeStart 1
 //Temporarys go from pos 5001 to pos 5033
 #define tempStart 5001
 //Heap starts at 5034 and goes up
@@ -16,9 +16,9 @@
 #define stackStart 9497 
 //Last mem pos is next frame pointer
 #define nextFramePointer 9499
-//Current frame pointer os position 998
+//Current frame pointer is position 9498
 #define currFramePointer 9498
-//Heap pointer is mem position 997
+//Heap pointer is mem position 9497
 #define heapPointer 9497
 
 /* Global variables definition */
@@ -230,8 +230,8 @@ void getAddress(assemblyListS A, QuadrupleList Q, varFieldType vfType, int field
                 insertAssemblyLine(A, LDA, number, NULL, 0);
                 
                 //X recebe endereco do temporario que contem o calc do indice
-                fprintf(assemblycode, "LDXI %d\n", Q->CurrQuad.firstField.arr.arrNum);
-                insertAssemblyLine(A, LDXI, number, NULL, Q->CurrQuad.firstField.arr.arrNum);
+                fprintf(assemblycode, "LDXI %d\n", Q->CurrQuad.firstField.arr.arrNum+tempStart);
+                insertAssemblyLine(A, LDXI, number, NULL, Q->CurrQuad.firstField.arr.arrNum+tempStart);
                 
                 fprintf(assemblycode, "SBC 0\n"); //Acc = endereco base do vet no heap + mem[temporario] (indice)
                 insertAssemblyLine(A, ADC, number, NULL, 0);
@@ -284,8 +284,8 @@ void getAddress(assemblyListS A, QuadrupleList Q, varFieldType vfType, int field
                 insertAssemblyLine(A, LDA, number, NULL, 0);
                 
                 //X recebe endereco do temporario que contem o calc do indice
-                fprintf(assemblycode, "LDXI %d\n", Q->CurrQuad.secField.arr.arrNum);
-                insertAssemblyLine(A, LDXI, number, NULL, Q->CurrQuad.secField.arr.arrNum);
+                fprintf(assemblycode, "LDXI %d\n", Q->CurrQuad.secField.arr.arrNum+tempStart);
+                insertAssemblyLine(A, LDXI, number, NULL, Q->CurrQuad.secField.arr.arrNum+tempStart);
                 
                 fprintf(assemblycode, "SBC 0\n"); //Acc = endereco base do vet no heap + mem[temporario]
                 insertAssemblyLine(A, ADC, number, NULL, 0);
@@ -338,8 +338,8 @@ void getAddress(assemblyListS A, QuadrupleList Q, varFieldType vfType, int field
                 insertAssemblyLine(A, LDA, number, NULL, 0);
                 
                 //X recebe endereco do temporario que contem o calc do indice
-                fprintf(assemblycode, "LDXI %d\n", Q->CurrQuad.thirdField.arr.arrNum);
-                insertAssemblyLine(A, LDXI, number, NULL, Q->CurrQuad.thirdField.arr.arrNum);
+                fprintf(assemblycode, "LDXI %d\n", Q->CurrQuad.thirdField.arr.arrNum+tempStart);
+                insertAssemblyLine(A, LDXI, number, NULL, Q->CurrQuad.thirdField.arr.arrNum+tempStart);
                 
                 fprintf(assemblycode, "SBC 0\n"); //Acc = endereco base do vet no heap + mem[temporario]
                 insertAssemblyLine(A, ADC, number, NULL, 0);
@@ -404,7 +404,7 @@ void printQList(QuadrupleList QList){
         case CalcQuad:
             //Primeiro pega firstField (estara em acc)
             //Depois pega secField (sera operado da memoria)
-            //Depois pega thirField (endereco do store)
+            //Depois pega thirdField (endereco do store)
 
             switch (Q->CurrQuad.ffType)
             {
@@ -760,8 +760,8 @@ void printQList(QuadrupleList QList){
             case FUN_END:
                 st_changeFuncLine(Q->CurrQuad.thirdField.name, codeLine, 1);
                 if(strcmp(Q->CurrQuad.thirdField.name, "main") == 0){
-                    fprintf(assemblycode, "BRK\n");
-                    insertAssemblyLine(A, BRK, -1, NULL, -1);
+                    fprintf(assemblycode, "SFF\n");
+                    insertAssemblyLine(A, SFF, -1, NULL, -1);
                 
                 }else{
                     popScopeNameStack();
@@ -804,6 +804,263 @@ void printQList(QuadrupleList QList){
                     fprintf(assemblycode, "JMP main\n");
                     insertAssemblyLine(A, JMP, string, "main", -1);
                 
+                }else if(strcmp(Q->CurrQuad.firstField.name, "changeContext") == 0){
+                    fprintf(assemblycode, "TSX\n");
+                    insertAssemblyLine(A, TSX, -1, NULL, -1);
+
+                    fprintf(assemblycode, "TXA\n");
+                    insertAssemblyLine(A, TXA, -1, NULL, -1);
+
+                    fprintf(assemblycode, "LDXI 0\n");
+                    insertAssemblyLine(A, LDXI, number, NULL, 0);
+
+                    fprintf(assemblycode, "STA 0\n");
+                    insertAssemblyLine(A, STA, number, NULL, 0);
+
+                    fprintf(assemblycode, "PLA\n");
+                    insertAssemblyLine(A, PLA, -1, NULL, -1);
+
+                    fprintf(assemblycode, "PHA\n");
+                    insertAssemblyLine(A, PHA, -1, NULL, -1);
+
+                    fprintf(assemblycode, "ADCI 1\n");
+                    insertAssemblyLine(A, ADCI, number, NULL, 1);
+
+                    fprintf(assemblycode, "MULPI 10000\n");
+                    insertAssemblyLine(A, MULPI, number, NULL, 10000);
+
+                    fprintf(assemblycode, "TAX\n");
+                    insertAssemblyLine(A, TAX, -1, NULL, -1);
+
+                    fprintf(assemblycode, "TXAX\n");
+                    insertAssemblyLine(A, TXAX, -1, NULL, -1);
+
+                    fprintf(assemblycode, "PLA\n");
+                    insertAssemblyLine(A, PLA, -1, NULL, -1);
+
+                    fprintf(assemblycode, "MULPI 6\n");
+                    insertAssemblyLine(A, MULPI, number, NULL, 6);
+                    
+                    fprintf(assemblycode, "TAX\n");
+                    insertAssemblyLine(A, TAX, -1, NULL, -1);
+
+                    fprintf(assemblycode, "LDA 9504\n");
+                    insertAssemblyLine(A, LDA, number, NULL, 9504);
+
+                    fprintf(assemblycode, "PHA\n");
+                    insertAssemblyLine(A, PHA, -1, NULL, -1);
+
+                    fprintf(assemblycode, "PLP\n");
+                    insertAssemblyLine(A, PLP, -1, NULL, -1);
+
+                    fprintf(assemblycode, "LDA 9505\n");
+                    insertAssemblyLine(A, LDA, number, NULL, 9505);
+                    
+                    fprintf(assemblycode, "PHA\n");
+                    insertAssemblyLine(A, PHA, -1, NULL, -1);
+
+                    fprintf(assemblycode, "PLPC\n");
+                    insertAssemblyLine(A, PLPC, -1, NULL, -1);
+
+                    fprintf(assemblycode, "TXA\n");
+                    insertAssemblyLine(A, TXA, -1, NULL, -1);
+
+                    fprintf(assemblycode, "TAY\n");
+                    insertAssemblyLine(A, TAY, -1, NULL, -1);
+
+                    fprintf(assemblycode, "LDA 9501\n");
+                    insertAssemblyLine(A, LDA, number, NULL, 9501);
+
+                    fprintf(assemblycode, "TAX\n");
+                    insertAssemblyLine(A, TAX, -1, NULL, -1);
+
+                    fprintf(assemblycode, "TXS\n");
+                    insertAssemblyLine(A, TXS, -1, NULL, -1);
+
+                    fprintf(assemblycode, "TYA\n");
+                    insertAssemblyLine(A, TYA, -1, NULL, -1);
+
+                    fprintf(assemblycode, "TAX\n");
+                    insertAssemblyLine(A, TAX, -1, NULL, -1);
+
+                    fprintf(assemblycode, "LDY 9503\n");
+                    insertAssemblyLine(A, LDY, number, NULL, 9503);
+
+                    fprintf(assemblycode, "LDA 9500\n");
+                    insertAssemblyLine(A, LDA, number, NULL, 9500);
+
+                    fprintf(assemblycode, "LDX 9502\n");
+                    insertAssemblyLine(A, LDX, number, NULL, 9502);
+
+                    fprintf(assemblycode, "SPC\n");
+                    insertAssemblyLine(A, SPC, -1, NULL, -1);
+
+
+                }else if(strcmp(Q->CurrQuad.firstField.name, "stackRegisters") == 0){
+                   
+                    fprintf(assemblycode, "OS line\n");
+
+                    //Transfer X on Aux Reg
+                    fprintf(assemblycode, "TXAX\n");
+                    insertAssemblyLine(A, TXAX, -1, NULL, -1);
+                    
+                    
+                    fprintf(assemblycode, "LDXI 0\n");
+                    insertAssemblyLine(A, LDXI, number, NULL, 0);
+                    
+                    //Store A on temp[0] (mem[5001+0])
+                    fprintf(assemblycode, "STA 5001\n");
+                    insertAssemblyLine(A, STA, number, NULL, 5001);
+                    
+                    fprintf(assemblycode, "TSX\n");
+                    insertAssemblyLine(A, TSX, -1, NULL, -1);
+                    
+                    fprintf(assemblycode, "TXA\n");
+                    insertAssemblyLine(A, TXA, -1, NULL, -1);
+                    
+                    fprintf(assemblycode, "LDXI 0\n");
+                    insertAssemblyLine(A, LDXI, number, NULL, 0);
+                    
+                    fprintf(assemblycode, "STA 5002\n");
+                    insertAssemblyLine(A, STA, number, NULL, 5002);
+                    
+                    fprintf(assemblycode, "LDA 0\n");
+                    insertAssemblyLine(A, LDA, number, NULL, 0);
+                    
+                    fprintf(assemblycode, "TAX\n");
+                    insertAssemblyLine(A, TAX, -1, NULL, -1);
+                    
+                    fprintf(assemblycode, "TXS\n");
+                    insertAssemblyLine(A, TXS, -1, NULL, -1);
+                    
+                    fprintf(assemblycode, "PHPC\n");
+                    insertAssemblyLine(A, PHPC, -1, NULL, -1);
+
+                    fprintf(assemblycode, "PHP\n");
+                    insertAssemblyLine(A, PHP, -1, NULL, -1);
+
+                    fprintf(assemblycode, "TYA\n");
+                    insertAssemblyLine(A, TYA, -1, NULL, -1);
+
+                    fprintf(assemblycode, "PHA\n");
+                    insertAssemblyLine(A, PHA, -1, NULL, -1);
+
+                    fprintf(assemblycode, "TAXX\n");
+                    insertAssemblyLine(A, TAXX, -1, NULL, -1);
+
+                    fprintf(assemblycode, "TXA\n");
+                    insertAssemblyLine(A, TXA, -1, NULL, -1);
+
+                    fprintf(assemblycode, "PHA\n");
+                    insertAssemblyLine(A, PHA, -1, NULL, -1);
+
+                    fprintf(assemblycode, "LDXI 0\n");
+                    insertAssemblyLine(A, LDXI, number, NULL, 0);
+
+                    fprintf(assemblycode, "LDA 5002\n");
+                    insertAssemblyLine(A, LDA, number, NULL, 5002);
+
+                    fprintf(assemblycode, "PHA\n");
+                    insertAssemblyLine(A, PHA, -1, NULL, -1);
+
+                    fprintf(assemblycode, "LDA 5001\n");
+                    insertAssemblyLine(A, LDA, number, NULL, 5001);
+
+                    fprintf(assemblycode, "PHA\n");
+                    insertAssemblyLine(A, PHA, -1, NULL, -1);
+
+                }else if(strcmp(Q->CurrQuad.firstField.name, "storeRegisters") == 0){
+                    
+                    fprintf(assemblycode, "PLA\n");
+                    insertAssemblyLine(A, PLA, -1, NULL, -1);
+
+                    fprintf(assemblycode, "MULPI 6\n");
+                    insertAssemblyLine(A, MULPI, number, NULL, 6);
+
+                    fprintf(assemblycode, "TAX\n");
+                    insertAssemblyLine(A, TAX, -1, NULL, -1);
+
+                    fprintf(assemblycode, "PLA\n");
+                    insertAssemblyLine(A, PLA, -1, NULL, -1);
+
+                    fprintf(assemblycode, "STA\n");
+                    insertAssemblyLine(A, STA, number, NULL, 9500);
+
+                    fprintf(assemblycode, "PLA\n");
+                    insertAssemblyLine(A, PLA, -1, NULL, -1);
+
+                    fprintf(assemblycode, "STA\n");
+                    insertAssemblyLine(A, STA, number, NULL, 9501);
+
+                    fprintf(assemblycode, "PLA\n");
+                    insertAssemblyLine(A, PLA, -1, NULL, -1);
+
+                    fprintf(assemblycode, "STA\n");
+                    insertAssemblyLine(A, STA, number, NULL, 9502);
+
+                    fprintf(assemblycode, "PLA\n");
+                    insertAssemblyLine(A, PLA, -1, NULL, -1);
+
+                    fprintf(assemblycode, "STA\n");
+                    insertAssemblyLine(A, STA, number, NULL, 9503);
+
+                    fprintf(assemblycode, "PLA\n");
+                    insertAssemblyLine(A, PLA, -1, NULL, -1);
+
+                    fprintf(assemblycode, "STA\n");
+                    insertAssemblyLine(A, STA, number, NULL, 9504);
+
+                    fprintf(assemblycode, "PLA\n");
+                    insertAssemblyLine(A, PLA, -1, NULL, -1);
+
+                    fprintf(assemblycode, "STA\n");
+                    insertAssemblyLine(A, STA, number, NULL, 9505);
+
+                }else if(strcmp(Q->CurrQuad.firstField.name, "processFinished") == 0){
+                    //Check Process Finish flag
+                    fprintf(assemblycode, "CPF\n");
+                    insertAssemblyLine(A, CPF, -1, NULL, -1);
+                    
+                }else if(strcmp(Q->CurrQuad.firstField.name, "setPC") == 0){
+                    fprintf(assemblycode, "TSX\n");
+                    insertAssemblyLine(A, TSX, -1, NULL, -1);
+
+                    fprintf(assemblycode, "TXA\n");
+                    insertAssemblyLine(A, TXA, -1, NULL, -1);
+
+                    fprintf(assemblycode, "LDXI 0\n");
+                    insertAssemblyLine(A, LDXI, number, NULL, 0);
+
+                    fprintf(assemblycode, "STA 0\n");
+                    insertAssemblyLine(A, STA, number, NULL, 0);
+
+                    fprintf(assemblycode, "PLA\n");
+                    insertAssemblyLine(A, PLA, -1, NULL, -1);
+
+                    fprintf(assemblycode, "ADCI 1\n");
+                    insertAssemblyLine(A, ADCI, number, NULL, 1);
+
+                    fprintf(assemblycode, "MULPI 10000\n");
+                    insertAssemblyLine(A, MULPI, number, NULL, 10000);
+
+                    fprintf(assemblycode, "TAX\n");
+                    insertAssemblyLine(A, TAX, -1, NULL, -1);
+
+                    fprintf(assemblycode, "TXAX\n");
+                    insertAssemblyLine(A, TXAX, -1, NULL, -1);
+
+                    fprintf(assemblycode, "LDAI 0\n");
+                    insertAssemblyLine(A, LDAI, number, NULL, 0);
+
+                    fprintf(assemblycode, "PHA\n");
+                    insertAssemblyLine(A, PHA, -1, NULL, -1);
+
+                    fprintf(assemblycode, "PLPC\n");
+                    insertAssemblyLine(A, PLPC, -1, NULL, -1);
+
+                    fprintf(assemblycode, "SPC\n");
+                    insertAssemblyLine(A, SPC, -1, NULL, -1);
+
                 }else{
                     //IDA
                     fprintf(assemblycode, "JSR %s\n", Q->CurrQuad.firstField.name); //Pula pra subrotina (Empilha PC)
@@ -1320,6 +1577,10 @@ char *printBinInstruct(instructionType instruction){
     case ADC:
         return "000111";
         break;
+
+    case TXAX:
+        return "001000";
+        break;
     
     case SBCI:
         return "001001";
@@ -1349,6 +1610,10 @@ char *printBinInstruct(instructionType instruction){
         return "001111";
         break;
     
+    case TAXX:
+        return "010000";
+        break;
+    
     case STA:
         return "010001";
         break;
@@ -1372,7 +1637,9 @@ char *printBinInstruct(instructionType instruction){
     case LDA:
         return "010111";
         break;
-    
+    case TABR:
+        return "011000";
+        break;
     case TXS:
         return "011001";
         break;
@@ -1399,6 +1666,10 @@ char *printBinInstruct(instructionType instruction){
 
     case STY:
         return "011111";
+        break;
+    
+    case PHPC:
+        return "100000";
         break;
 
     case RTS:
@@ -1427,6 +1698,10 @@ char *printBinInstruct(instructionType instruction){
 
     case BEQ:
         return "100111";
+        break;
+
+    case PLPC:
+        return "101000";
         break;
 
     case DIVSI:
@@ -1476,7 +1751,19 @@ char *printBinInstruct(instructionType instruction){
     case DEX:
         return "110111";
         break;
+
+    case SPC:
+        return "111000";
+        break;
     
+    case SFF:
+        return "111001";
+        break;
+
+    case CPF:
+        return "111010";
+        break;
+
     case OUP:
         return "111011";
         break;
@@ -1493,6 +1780,10 @@ char *printBinInstruct(instructionType instruction){
         return "111111";
         break;
 
+    case LDX:
+        return "010101";
+        break;
+
     default:
         return "MISSING";
         break;
@@ -1506,6 +1797,54 @@ void printBinary(assemblyListS AList){
     for(A = AList; A != NULL; A = A->next){
         switch (A->instruction)
         {
+        case TXAX:
+            fprintf(binarycode, "%s%s ", printBinInstruct(A->instruction), decimalToBinary(0));
+            break;
+
+        case TAXX:
+            fprintf(binarycode, "%s%s ", printBinInstruct(A->instruction), decimalToBinary(0));
+            break;
+
+        case TABR:
+            fprintf(binarycode, "%s%s ", printBinInstruct(A->instruction), decimalToBinary(0));
+            break;
+
+        case PHPC:
+            fprintf(binarycode, "%s%s ", printBinInstruct(A->instruction), decimalToBinary(0));
+            break;
+
+        case PHP:
+            fprintf(binarycode, "%s%s ", printBinInstruct(A->instruction), decimalToBinary(0));
+            break;
+
+        case PLPC:
+            fprintf(binarycode, "%s%s ", printBinInstruct(A->instruction), decimalToBinary(0));
+            break;
+        
+        case PLP:
+            fprintf(binarycode, "%s%s ", printBinInstruct(A->instruction), decimalToBinary(0));
+            break;
+
+        case CPF:
+            fprintf(binarycode, "%s%s ", printBinInstruct(A->instruction), decimalToBinary(0));
+            break;
+
+        case SFF:
+            fprintf(binarycode, "%s%s ", printBinInstruct(A->instruction), decimalToBinary(0));
+            break;
+
+        case SPC:
+            fprintf(binarycode, "%s%s ", printBinInstruct(A->instruction), decimalToBinary(0));
+            break;
+
+        case LDX:
+            fprintf(binarycode, "%s%s ", printBinInstruct(A->instruction), decimalToBinary(A->field.num));
+            break;
+        
+        case LDY:
+            fprintf(binarycode, "%s%s ", printBinInstruct(A->instruction), decimalToBinary(A->field.num));
+            break;
+
         case ADC:
             fprintf(binarycode, "%s%s ", printBinInstruct(A->instruction), decimalToBinary(A->field.num));
             break;

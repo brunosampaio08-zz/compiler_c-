@@ -1,66 +1,151 @@
 
-Compilação C-: input/programa1.cm
+Compilação C-: input/sort.cm
 
 Arvore Sintatica:
+    Declaracao de Vetor:  int vet[10];
+        Declaracao de funcao:  int minloc()
+            Parametro Vetor: a
+              Parametro: int low
+              Parametro: int high
+              Declaracao composta
+            Declaracao de variavel:  int i;
+                    Declaracao de variavel:  int x;
+                    Declaracao de variavel:  int k;
+                    Atribuicao
+                Id: k
+                Id: low
+            Atribuicao
+                Id: x
+                ArrId 
+                    Id: low
+            Atribuicao
+                Id: i
+                Operador : +
+                    Id: low
+                    Op: +
+                    Const: 1
+            While
+                Operador : <
+                    Id: i
+                    Op: <
+                    Id: high
+                Declaracao composta
+                    If
+                        Operador : <
+                            ArrId 
+                                Id: i
+                            Op: <
+                            Id: x
+                        Declaracao composta
+                            Atribuicao
+                                Id: x
+                                ArrId 
+                                    Id: i
+                            Atribuicao
+                                Id: k
+                                Id: i
+                    Atribuicao
+                        Id: i
+                        Operador : +
+                            Id: i
+                            Op: +
+                            Const: 1
+            Return
+                Id: k
+    Declaracao de funcao:  void sort()
+            Parametro Vetor: a
+              Parametro: int low
+              Parametro: int high
+              Declaracao composta
+            Declaracao de variavel:  int i;
+                    Declaracao de variavel:  int k;
+                    Atribuicao
+                Id: i
+                Id: low
+            While
+                Operador : <
+                    Id: i
+                    Op: <
+                    Operador : -
+                        Id: high
+                        Op: -
+                        Const: 1
+                Declaracao composta
+                    Declaracao de variavel:  int t;
+                                Atribuicao
+                        Id: k
+                        Chamada de funcao: minloc
+                            Id: a
+                            Id: i
+                            Id: high
+                    Atribuicao
+                        Id: t
+                        ArrId 
+                            Id: k
+                    Atribuicao
+                        ArrId 
+                            Id: k
+                        ArrId 
+                            Id: i
+                    Atribuicao
+                        ArrId 
+                            Id: i
+                        Id: t
+                    Atribuicao
+                        Id: i
+                        Operador : +
+                            Id: i
+                            Op: +
+                            Const: 1
     Declaracao de funcao:  void main()
             Parametro: void void
         Declaracao composta
-            Declaracao de variavel:  int a;
-                    Declaracao de variavel:  int b;
+            Declaracao de variavel:  int i;
+                    Declaracao de variavel:  int a;
                     Atribuicao
-                Id: a
-                Chamada de funcao: input
-            Atribuicao
-                Id: b
-                Chamada de funcao: input
-            If
-                Operador : ==
-                    Id: a
-                    Op: ==
-                    Id: b
-                Declaracao composta
-                    Chamada de funcao: output
-                        Const: 1
-            If
-                Operador : !=
-                    Id: a
-                    Op: !=
-                    Id: b
-                Declaracao composta
-                    Chamada de funcao: output
-                        Const: 2
-            If
-                Operador : >
-                    Id: a
-                    Op: >
-                    Id: b
-                Declaracao composta
-                    Chamada de funcao: output
-                        Const: 3
-            If
+                Id: i
+                Const: 0
+            While
                 Operador : <
-                    Id: a
+                    Id: i
                     Op: <
-                    Id: b
+                    Const: 5
+                Declaracao composta
+                    Atribuicao
+                        Id: a
+                        Chamada de funcao: input
+                    Atribuicao
+                        ArrId 
+                            Id: i
+                        Id: a
+                    Atribuicao
+                        Id: i
+                        Operador : +
+                            Id: i
+                            Op: +
+                            Const: 1
+            Chamada de funcao: sort
+                Id: vet
+                Const: 0
+                Const: 5
+            Atribuicao
+                Id: i
+                Const: 0
+            While
+                Operador : <
+                    Id: i
+                    Op: <
+                    Const: 5
                 Declaracao composta
                     Chamada de funcao: output
-                        Const: 4
-            If
-                Operador : >=
-                    Id: a
-                    Op: >=
-                    Id: b
-                Declaracao composta
-                    Chamada de funcao: output
-                        Const: 5
-            If
-                Operador : <=
-                    Id: a
-                    Op: <=
-                    Id: b
-                Declaracao composta
-                    Chamada de funcao: output
-                        Const: 6
+                        ArrId 
+                            Id: i
+                    Atribuicao
+                        Id: i
+                        Operador : +
+                            Id: i
+                            Op: +
+                            Const: 1
 
 Construindo a tabela de simbolos...
 
@@ -72,18 +157,51 @@ Escopo : global
 ---------------------------------------------------------------------------
 Nome       Tipo             Tipo de Dado     loc    Número das linhas 
 ---------  ---------------  ------------     ---    ------------------
-main       Funcao           Void              0     1
+processFinishedFuncao           Integer           0     0
+main       Funcao           Void              0     34
+changeContextFuncao           Void              0     0
+sort       Funcao           Void              0     21
 input      Funcao           Integer           0     0
+vet        Vetor            Vetor de Integers 1     4
+minloc     Funcao           Integer           0     6
+setPC      Funcao           Void              0     0
 output     Funcao           Void              0     0
----------------------Decl Num == 0 ---------------------------
+stackRegistersFuncao           Void              0     0
+storeRegistersFuncao           Void              0     0
+---------------------Decl Num == 1 ---------------------------
+---------------------------------------------------------------------------
+
+Escopo : minloc
+---------------------------------------------------------------------------
+Nome       Tipo             Tipo de Dado     loc    Número das linhas 
+---------  ---------------  ------------     ---    ------------------
+low        Parametro        Integer           2     6, 8, 9, 10
+a          Parametro Vetor  Void              1     6, 9
+i          Variavel         Integer           4     7, 10, 11
+k          Variavel         Integer           6     7, 8, 18
+x          Variavel         Integer           5     7, 9
+high       Parametro        Integer           3     6, 11
+---------------------Decl Num == 6 ---------------------------
+---------------------------------------------------------------------------
+
+Escopo : sort
+---------------------------------------------------------------------------
+Nome       Tipo             Tipo de Dado     loc    Número das linhas 
+---------  ---------------  ------------     ---    ------------------
+low        Parametro        Integer           2     21, 23
+a          Parametro Vetor  Void              1     21
+i          Variavel         Integer           4     22, 23, 24
+k          Variavel         Integer           5     22
+high       Parametro        Integer           3     21, 24
+---------------------Decl Num == 5 ---------------------------
 ---------------------------------------------------------------------------
 
 Escopo : main
 ---------------------------------------------------------------------------
 Nome       Tipo             Tipo de Dado     loc    Número das linhas 
 ---------  ---------------  ------------     ---    ------------------
-a          Variavel         Integer           1     2, 4, 6, 9, 12, 15, 18, 21
-b          Variavel         Integer           2     3, 5, 6, 9, 12, 15, 18, 21
+a          Variavel         Integer           2     37
+i          Variavel         Integer           1     36, 38, 39, 45, 46
 ---------------------Decl Num == 2 ---------------------------
 ---------------------------------------------------------------------------
 

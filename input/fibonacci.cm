@@ -1,0 +1,18 @@
+int fib(int n){
+    int x;
+    int y;
+    if(n <= 1){
+        return n;
+    }
+    y = (fib(n-1));
+    x = (fib(n-2));
+    return x+y;
+}
+
+void main(void){
+    int a;
+    int b;
+    a = input();
+    b = fib(a);
+    output(b);
+}
